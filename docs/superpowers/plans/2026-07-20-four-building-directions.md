@@ -29,7 +29,7 @@
 **Interfaces:**
 - Produces: two optimized local image paths consumed by `siteContent.work`
 
-- [ ] **Step 1: Generate the commerce creator photograph**
+- [x] **Step 1: Generate the commerce creator photograph**
 
 Use the image generation tool with this exact direction:
 
@@ -37,11 +37,11 @@ Use the image generation tool with this exact direction:
 Photorealistic editorial documentary photograph for a Chinese independent developer portfolio. A creator's hands arrange a small unbranded product sample beside a smartphone showing several vertical short-video frames and a laptop showing a clean storyboard/timeline structure. The scene communicates product selection, script planning, asset organization, and turning a product into a finished commerce video. Natural window light, restrained cool-gray and off-white desk, one small cobalt-blue accent object, credible everyday equipment, calm focused atmosphere. No visible face, no readable text, no logos, no platform marks, no watermark, no neon, no floating holograms. Landscape 3:2 composition, important phone, product and hands grouped near the center so a square crop and a mobile 4:3 crop both remain clear.
 ```
 
-- [ ] **Step 2: Inspect the generated commerce image**
+- [x] **Step 2: Inspect the generated commerce image**
 
 Verify visually that the product, phone, hands, and editing/storyboard context are clear and centered, with no readable text, logos, watermark, malformed hands, or face.
 
-- [ ] **Step 3: Generate the enterprise automation photograph**
+- [x] **Step 3: Generate the enterprise automation photograph**
 
 Use the image generation tool with this exact direction:
 
@@ -49,11 +49,11 @@ Use the image generation tool with this exact direction:
 Photorealistic editorial documentary photograph for a Chinese independent developer portfolio. Three-quarter view of a realistic work desk where a person's hand maps an enterprise automation workflow. A monitor shows a clean non-readable node flow connecting a form, table, message, and document modules; paper beside it carries simple boxes and arrows. Natural soft daylight, restrained cool-gray and off-white palette, one subtle cobalt-blue accent, practical modern equipment, calm precise atmosphere. No visible face, no readable text, no logos, no third-party brand marks, no watermark, no neon, no floating holograms. Landscape 3:2 composition, workflow nodes and hand concentrated near the center so desktop and mobile crops stay understandable.
 ```
 
-- [ ] **Step 4: Inspect the generated automation image**
+- [x] **Step 4: Inspect the generated automation image**
 
 Verify visually that the workflow-node structure and the human action are clear and centered, with no readable text, logos, watermark, malformed hand, or face.
 
-- [ ] **Step 5: Convert both approved source images to optimized WebP**
+- [x] **Step 5: Convert both approved source images to optimized WebP**
 
 Run the Sharp conversion with each generated source path substituted as the first argument:
 
@@ -64,7 +64,7 @@ node -e 'const sharp=require("./node_modules/.pnpm/sharp@0.34.5/node_modules/sha
 
 Expected: both files exist, are valid WebP images, are no wider than 1800 pixels, and are each below 300 KB.
 
-- [ ] **Step 6: Commit the image assets**
+- [x] **Step 6: Commit the image assets**
 
 ```bash
 git add public/images/shawnnova-commerce-creator-v2.webp public/images/shawnnova-business-automation-v2.webp
