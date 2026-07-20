@@ -52,6 +52,18 @@ export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
   const turnstileWidgetId = useRef<string | null>(null);
 
   useEffect(() => {
+    if (!turnstileSiteKey || turnstileReady) return;
+
+    const detectLoadedApi = () => {
+      if (window.turnstile) setTurnstileReady(true);
+    };
+
+    detectLoadedApi();
+    const detectionTimer = window.setInterval(detectLoadedApi, 100);
+    return () => window.clearInterval(detectionTimer);
+  }, [turnstileReady, turnstileSiteKey]);
+
+  useEffect(() => {
     if (
       !turnstileReady ||
       !turnstileSiteKey ||

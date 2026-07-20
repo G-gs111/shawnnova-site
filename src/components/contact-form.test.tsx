@@ -41,6 +41,31 @@ describe("ContactForm", () => {
     expect(screen.getByText("提交前请确认联系授权。")).toBeVisible();
   });
 
+  it("initializes Turnstile when the API becomes available after mount", async () => {
+    window.turnstile = undefined;
+    const renderWidget = vi.fn(
+      (_element: HTMLElement, options: { callback: (token: string) => void }) => {
+        options.callback("late-turnstile-token");
+        return "late-widget-id";
+      },
+    );
+
+    render(
+      <ContactForm
+        endpoint="https://contact-api.260604.xyz"
+        turnstileSiteKey="test-site-key"
+      />,
+    );
+
+    window.turnstile = {
+      remove: vi.fn(),
+      render: renderWidget,
+      reset: vi.fn(),
+    };
+
+    await waitFor(() => expect(renderWidget).toHaveBeenCalledTimes(1));
+  });
+
   it("submits exact values and shows the success state", async () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });
     vi.stubGlobal("fetch", fetchMock);
