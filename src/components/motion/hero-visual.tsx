@@ -3,6 +3,8 @@
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
 import Image from "next/image";
 
+import { siteContent } from "@/content/site";
+
 export function HeroVisual() {
   const reduceMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
@@ -15,7 +17,6 @@ export function HeroVisual() {
   return (
     <motion.div
       className="hero-visual"
-      aria-hidden="true"
       onPointerMove={(event) => {
         if (reduceMotion) return;
         const bounds = event.currentTarget.getBoundingClientRect();
@@ -36,14 +37,16 @@ export function HeroVisual() {
       transition={{ duration: reduceMotion ? 0 : 0.9, ease: [0.16, 1, 0.3, 1] }}
     >
       <Image
-        src="/images/shawnnova-hero.webp"
-        alt=""
+        src={siteContent.heroVisual.image}
+        alt={siteContent.heroVisual.alt}
         fill
         fetchPriority="high"
         loading="eager"
         sizes="(max-width: 767px) 100vw, 48vw"
       />
-      <div className="hero-visual-mark">SN</div>
+      <div className="hero-visual-mark" aria-hidden="true">
+        SN
+      </div>
     </motion.div>
   );
 }

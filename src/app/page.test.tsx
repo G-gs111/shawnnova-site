@@ -26,6 +26,19 @@ describe("HomePage", () => {
     expect(screen.getByText("销售")).toBeInTheDocument();
     expect(screen.getByText("产品开发")).toBeInTheDocument();
     expect(screen.getByText("Vibe Coding")).toBeInTheDocument();
+    const tools = screen.getByRole("region", { name: "常用工具" });
+    for (const label of [
+      "Codex",
+      "飞书",
+      "GitHub",
+      "VS Code",
+      "Cloudflare",
+      "Vercel",
+    ]) {
+      expect(tools).toHaveTextContent(label);
+    }
+    expect(tools.querySelectorAll("svg")).toHaveLength(5);
+    expect(screen.getByRole("img", { name: "飞书图标" })).toBeInTheDocument();
     expect(
       screen
         .getAllByRole("link", { name: /shawnnovags111@gmail.com/i })

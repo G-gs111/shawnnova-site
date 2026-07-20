@@ -4,15 +4,15 @@
 
 **Goal:** Replace the four abstract/repeated portfolio visuals with distinct editorial work-scene images and add a locally rendered strip of six accurate everyday-tool logos.
 
-**Architecture:** Generate and visually screen four brand-free source images, convert approved outputs to versioned WebP assets, and reference them through `siteContent`. Add a server-rendered `ToolStrip` component that maps content-owned icon keys to local SVG paths from `simple-icons`, then integrate it between the motto and work sections with responsive editorial styling.
+**Architecture:** Generate and visually screen four brand-free source images, convert approved outputs to versioned WebP assets, and reference them through `siteContent`. Add a server-rendered `ToolStrip` component that maps content-owned icon keys to locally bundled Iconify logo data plus an official local Feishu mark, then integrate it between the motto and work sections with responsive editorial styling.
 
-**Tech Stack:** Next.js 16, React 19, TypeScript 5.9, Next Image, CSS, `simple-icons` 16.27.0, Vitest/Testing Library, Playwright, OpenAI ImageGen, Vercel
+**Tech Stack:** Next.js 16, React 19, TypeScript 5.9, Next Image, CSS, `@iconify-json/logos` 1.2.11, Vitest/Testing Library, Playwright, OpenAI ImageGen, Vercel
 
 ## Global Constraints
 
 - Use four distinct, concrete editorial work images; do not reuse one image across project cards.
 - Do not show a clear fictional face, malformed logo, readable gibberish, watermark, cyberpunk effects, or abstract metal sculpture in generated images.
-- Render Codex, 飞书, GitHub, VS Code, Cloudflare, and Vercel logos from local SVG data, never from generated pixels or a third-party CDN.
+- Render Codex, 飞书, GitHub, VS Code, Cloudflare, and Vercel logos from locally bundled data, never from generated pixels or a runtime third-party CDN.
 - Preserve the existing information architecture, contact form service, typography, domain, light/dark themes, and cobalt accent.
 - Keep generated text and logos out of photographic assets; visible brand names are HTML text.
 - Serve versioned high-quality WebP files through Next Image and verify desktop/mobile crops.
@@ -210,27 +210,28 @@ git add src/content/site.ts src/content/site.test.ts
 git commit -m "feat: describe portfolio imagery and tools"
 ```
 
-### Task 3: Build the local SVG tool strip with tests
+### Task 3: Build the local tool strip with tests
 
 **Files:**
 - Modify: `package.json`
 - Modify: `pnpm-lock.yaml`
+- Create: `public/images/feishu-tool-logo.png`
 - Create: `src/components/tool-strip.tsx`
 - Modify: `src/app/page.test.tsx`
 
 **Interfaces:**
 - Consumes: `siteContent.tools` and icon keys `openai | feishu | github | visualstudiocode | cloudflare | vercel`
-- Produces: `ToolStrip(): JSX.Element`, a labelled `section.tool-strip` with six visible tool names and local inline SVG paths
+- Produces: `ToolStrip(): JSX.Element`, a labelled `section.tool-strip` with six visible tool names, five inline SVGs, and one official local Feishu mask asset
 
 - [ ] **Step 1: Add the exact local icon dependency**
 
 Run:
 
 ```bash
-pnpm add simple-icons@16.27.0
+pnpm add @iconify-json/logos@1.2.11
 ```
 
-Expected: `package.json` contains `"simple-icons": "16.27.0"` under dependencies and the lockfile is updated.
+Expected: `package.json` contains `"@iconify-json/logos": "1.2.11"` under dependencies and the lockfile is updated. Download the official transparent Feishu favicon from `www.feishu.cn` into `public/images/feishu-tool-logo.png`; the production page references only the local copy.
 
 - [ ] **Step 2: Write the failing page test**
 
@@ -241,7 +242,8 @@ const tools = screen.getByRole("region", { name: "常用工具" });
 for (const label of ["Codex", "飞书", "GitHub", "VS Code", "Cloudflare", "Vercel"]) {
   expect(tools).toHaveTextContent(label);
 }
-expect(tools.querySelectorAll("svg")).toHaveLength(6);
+expect(tools.querySelectorAll("svg")).toHaveLength(5);
+expect(screen.getByRole("img", { name: "飞书图标" })).toBeInTheDocument();
 ```
 
 - [ ] **Step 3: Run the page test and verify failure**
@@ -255,24 +257,16 @@ Expected: FAIL because no region named `常用工具` is rendered.
 Create `src/components/tool-strip.tsx`:
 
 ```tsx
-import {
-  siCloudflare,
-  siFeishu,
-  siGithub,
-  siOpenai,
-  siVercel,
-  siVisualstudiocode,
-} from "simple-icons/icons";
+import { icons as logoCollection } from "@iconify-json/logos";
 
 import { siteContent } from "@/content/site";
 
-const toolIcons = {
-  cloudflare: siCloudflare,
-  feishu: siFeishu,
-  github: siGithub,
-  openai: siOpenai,
-  vercel: siVercel,
-  visualstudiocode: siVisualstudiocode,
+const logoNames = {
+  cloudflare: "cloudflare-icon",
+  github: "github-icon",
+  openai: "openai-icon",
+  vercel: "vercel-icon",
+  visualstudiocode: "visual-studio-code",
 } as const;
 
 export function ToolStrip() {
@@ -284,13 +278,31 @@ export function ToolStrip() {
       </div>
       <ul className="tool-list" aria-label="常用工具列表">
         {siteContent.tools.map((tool) => {
-          const icon = toolIcons[tool.icon];
+          if (tool.icon === "feishu") {
+            return (
+              <li key={tool.label} tabIndex={0}>
+                <span
+                  className="tool-logo tool-logo-feishu"
+                  role="img"
+                  aria-label="飞书图标"
+                />
+                <span>{tool.label}</span>
+              </li>
+            );
+          }
+
+          const icon = logoCollection.icons[logoNames[tool.icon]];
+          const width = icon.width ?? logoCollection.width ?? 24;
+          const height = icon.height ?? logoCollection.height ?? width;
 
           return (
             <li key={tool.label} tabIndex={0}>
-              <svg viewBox="0 0 24 24" role="img" aria-label={`${tool.label} 图标`}>
-                <path d={icon.path} />
-              </svg>
+              <svg
+                viewBox={`0 0 ${width} ${height}`}
+                role="img"
+                aria-label={`${tool.label} 图标`}
+                dangerouslySetInnerHTML={{ __html: icon.body }}
+              />
               <span>{tool.label}</span>
             </li>
           );
@@ -318,12 +330,12 @@ and add `aria-hidden="true"` to `<div className="hero-visual-mark">SN</div>`.
 
 Run: `pnpm test -- src/app/page.test.tsx src/content/site.test.ts`
 
-Expected: PASS with six inline SVGs and the new hero/work content.
+Expected: PASS with five inline SVGs, one official local Feishu mark, and the new hero/work content.
 
 - [ ] **Step 7: Commit the component and dependency**
 
 ```bash
-git add package.json pnpm-lock.yaml src/components/tool-strip.tsx src/app/page.tsx src/app/page.test.tsx src/components/motion/hero-visual.tsx
+git add package.json pnpm-lock.yaml public/images/feishu-tool-logo.png src/components/tool-strip.tsx src/app/page.tsx src/app/page.test.tsx src/components/motion/hero-visual.tsx
 git commit -m "feat: add everyday tool strip"
 ```
 
