@@ -7,3 +7,4 @@ test-results/
 worker/dist/
 .vercel/
 .DS_Store
+.env.local

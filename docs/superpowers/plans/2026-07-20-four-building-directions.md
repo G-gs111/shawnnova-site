@@ -270,7 +270,7 @@ git commit -m "style: arrange four building directions"
 **Interfaces:**
 - Produces: the live site at `https://260604.xyz` with the approved four-direction section
 
-- [ ] **Step 1: Run the complete automated verification suite**
+- [x] **Step 1: Run the complete automated verification suite**
 
 Run:
 
@@ -284,15 +284,15 @@ pnpm test:e2e
 
 Expected: lint succeeds; 18 or more unit tests pass; seven worker tests pass; production build succeeds; all applicable desktop and mobile Playwright tests pass.
 
-- [ ] **Step 2: Run the design and copy pre-flight audit**
+- [x] **Step 2: Run the design and copy pre-flight audit**
 
 Inspect all visible strings and responsive states. Confirm zero em-dashes in visible content, one cobalt accent system, consistent corner radii, readable light/dark themes, no overflowing CTA or project title, no horizontal overflow, motivated reduced-motion-safe transitions, four real project images, and no generated-image text or logo artifacts.
 
-- [ ] **Step 3: Inspect the branch and merge it locally into main**
+- [x] **Step 3: Inspect the branch and merge it locally into main**
 
 Confirm the worktree is clean and review the branch diff. Merge `feat/editorial-imagery` into `main` using a normal non-destructive merge from `/Users/Admin/Documents/Development-try/shawnnova-site`.
 
-- [ ] **Step 4: Confirm the existing Vercel project and deploy production**
+- [x] **Step 4: Confirm the existing Vercel project and deploy production**
 
 Use the existing `shawnnova-site` Vercel project. Do not create a second project. Deploy the merged main checkout with:
 
@@ -302,7 +302,7 @@ pnpm exec vercel --prod --yes
 
 Expected: Vercel reports a successful production deployment associated with `260604.xyz`.
 
-- [ ] **Step 5: Verify production only in the user's Google Chrome**
+- [x] **Step 5: Verify production only in the user's Google Chrome**
 
 Open `https://260604.xyz` in the user's existing Chrome, hard refresh, and confirm:
 
@@ -314,6 +314,6 @@ Open `https://260604.xyz` in the user's existing Chrome, hard refresh, and confi
 - contact links and the visitor contact form remain present;
 - both light and dark theme states remain readable.
 
-- [ ] **Step 6: Record completion evidence**
+- [x] **Step 6: Record completion evidence**
 
 Capture final test counts, build result, deployed production URL, commit hash, and Chrome verification result before marking the goal complete.
