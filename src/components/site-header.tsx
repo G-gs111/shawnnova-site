@@ -5,7 +5,7 @@ import { siteContent } from "@/content/site";
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <a className="brand" href="#about" aria-label="返回首页">
+      <a className="brand" href="#about">
         <span>{siteContent.identity.name}</span>
         <span className="brand-alias">{siteContent.identity.alias}</span>
       </a>

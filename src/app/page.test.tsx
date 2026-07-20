@@ -21,7 +21,13 @@ describe("HomePage", () => {
     expect(screen.getByText("桌面端体验")).toBeInTheDocument();
     expect(screen.getByText("持续实验")).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: "在 GitHub 联系我" }),
-    ).toHaveAttribute("href", "https://github.com/G-gs111");
+      screen
+        .getAllByRole("link", { name: "GitHub" })
+        .some(
+          (link) =>
+            link.classList.contains("contact-link") &&
+            link.getAttribute("href") === "https://github.com/G-gs111",
+        ),
+    ).toBe(true);
   });
 });

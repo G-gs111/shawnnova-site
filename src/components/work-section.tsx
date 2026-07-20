@@ -62,7 +62,7 @@ export function WorkSection() {
         target="_blank"
         rel="noreferrer"
       >
-        查看 GitHub
+        GitHub
         <ArrowUpRight size={18} weight="regular" aria-hidden="true" />
       </a>
     </section>

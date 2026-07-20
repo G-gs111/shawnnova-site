@@ -26,16 +26,12 @@ export function HeroVisual() {
         pointerX.set(0);
         pointerY.set(0);
       }}
-      style={
-        reduceMotion
-          ? undefined
-          : {
-              rotateX,
-              rotateY,
-              transformPerspective: 1200,
-            }
-      }
-      initial={reduceMotion ? false : { opacity: 0, scale: 0.985 }}
+      style={{
+        rotateX,
+        rotateY,
+        transformPerspective: 1200,
+      }}
+      initial={{ opacity: 0, scale: 0.985 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: reduceMotion ? 0 : 0.9, ease: [0.16, 1, 0.3, 1] }}
     >
@@ -43,7 +39,8 @@ export function HeroVisual() {
         src="/images/shawnnova-hero.webp"
         alt=""
         fill
-        priority
+        fetchPriority="high"
+        loading="eager"
         sizes="(max-width: 767px) 100vw, 48vw"
       />
       <div className="hero-visual-mark">SN</div>

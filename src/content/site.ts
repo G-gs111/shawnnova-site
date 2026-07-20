@@ -17,7 +17,7 @@ export const siteContent = {
       title: "AI 视频工具",
       description: "把字幕识别、画面修复和自动化流程组合成真正可用的视频处理工具。",
       kind: "核心方向",
-      image: "/images/shawnnova-hero.webp",
+      image: "/images/shawnnova-work.webp",
       alt: "蓝色玻璃与金属折面构成的抽象技术装置",
     },
     {
@@ -50,7 +50,7 @@ export const siteContent = {
     },
   ],
   contact: {
-    label: "在 GitHub 联系我",
+    label: "GitHub",
     href: "https://github.com/G-gs111",
     note: "如果你也在做有意思的产品，欢迎聊聊。",
   },

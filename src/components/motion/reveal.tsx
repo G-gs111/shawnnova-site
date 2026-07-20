@@ -2,8 +2,8 @@
 
 import { motion, useReducedMotion } from "motion/react";
 
-export function getRevealInitial(reduceMotion: boolean) {
-  return reduceMotion ? false : { opacity: 0, y: 20 };
+export function getRevealInitial() {
+  return { opacity: 1, y: 20 };
 }
 
 type RevealProps = {
@@ -18,7 +18,7 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
   return (
     <motion.div
       className={className}
-      initial={getRevealInitial(Boolean(reduceMotion))}
+      initial={getRevealInitial()}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.22 }}
       transition={{
