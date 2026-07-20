@@ -154,6 +154,8 @@ async function handleRequest(request: Request, env: ContactEnv) {
   return json({ ok: true }, 201, origin);
 }
 
-export default {
+const worker = {
   fetch: handleRequest,
 };
+
+export default worker;

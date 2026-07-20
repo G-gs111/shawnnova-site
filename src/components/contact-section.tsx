@@ -45,7 +45,6 @@ export function ContactSection() {
         </div>
 
         <div className="contact-panel">
-          <p className="section-kicker">留下线索</p>
           <h3>也可以让我来联系你。</h3>
           <ContactForm endpoint={endpoint} turnstileSiteKey={turnstileSiteKey} />
         </div>

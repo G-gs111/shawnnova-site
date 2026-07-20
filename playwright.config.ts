@@ -22,6 +22,10 @@ export default defineConfig({
   ],
   webServer: {
     command: "pnpm dev",
+    env: {
+      NEXT_PUBLIC_CONTACT_API_URL: "https://contact-api.260604.xyz/",
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: "playwright-site-key",
+    },
     reuseExistingServer: true,
     timeout: 120_000,
     url: "http://127.0.0.1:3000",

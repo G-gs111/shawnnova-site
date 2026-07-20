@@ -18,7 +18,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://260604.xyz"),
   title: "葛少玉 | Shawnnova",
-  description: "独立开发者，关注 AI 应用、自动化与有质感的数字体验。",
+  description:
+    "葛少玉（Shawnnova）的个人网站，关注运营、销售、产品开发与 Vibe Coding。",
 };
 
 export default function RootLayout({

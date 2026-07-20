@@ -13,7 +13,6 @@ export function Hero() {
         </p>
         <h1>{siteContent.identity.headline}</h1>
         <p className="hero-introduction">{siteContent.identity.introduction}</p>
-        <p className="hero-motto">{siteContent.identity.motto}</p>
         <div className="hero-actions">
           <a className="button button-primary" href="#work">
             查看作品
