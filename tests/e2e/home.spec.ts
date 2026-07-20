@@ -56,6 +56,7 @@ test("uses an asymmetric experience rail and a two-column contact layout on desk
   await expect(page.locator(".experience-section")).toHaveCSS("display", "grid");
   await expect(page.locator(".contact-layout")).toHaveCSS("display", "grid");
   await expect(page.locator(".tool-list")).toHaveCSS("display", "grid");
+  await expect(page.locator("#work article")).toHaveCount(4);
 
   const toolColumns = await page.locator(".tool-list").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean),
@@ -66,6 +67,15 @@ test("uses an asymmetric experience rail and a two-column contact layout on desk
     getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean),
   );
   expect(contactColumns).toHaveLength(2);
+
+  const supportingColumns = await page.locator(".work-supporting").evaluate((element) =>
+    getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean),
+  );
+  expect(supportingColumns).toHaveLength(2);
+
+  const firstSupporting = page.locator(".work-supporting > div").first();
+  await expect(firstSupporting).toHaveCSS("grid-column-start", "1");
+  await expect(firstSupporting).toHaveCSS("grid-column-end", "-1");
 });
 
 test("submits a visitor contact after Turnstile verification", async ({ page }) => {
@@ -105,13 +115,24 @@ test("submits a visitor contact after Turnstile verification", async ({ page }) 
   );
 });
 
-test("keeps the page within the mobile viewport", async ({ page }) => {
+test("keeps the page within the mobile viewport", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile-chrome");
   await page.goto("/");
 
   const overflow = await page.evaluate(
     () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
   );
   expect(overflow).toBeLessThanOrEqual(1);
+  await expect(page.locator("#work article")).toHaveCount(4);
+
+  const mobileSupportingColumns = await page.locator(".work-supporting").evaluate((element) =>
+    getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean),
+  );
+  expect(mobileSupportingColumns).toHaveLength(1);
+  await expect(page.locator(".work-supporting > div").first()).toHaveCSS(
+    "grid-column-start",
+    "auto",
+  );
   await expect(page.locator("#contact")).toBeVisible();
 });
 

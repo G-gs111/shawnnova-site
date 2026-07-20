@@ -402,7 +402,7 @@ textarea:focus-visible {
 
 .work-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.72fr);
+  grid-template-columns: minmax(0, 1.3fr) minmax(420px, 0.95fr);
   gap: 22px;
   margin-top: 64px;
 }
@@ -470,7 +470,17 @@ textarea:focus-visible {
 
 .work-supporting {
   display: grid;
-  gap: 52px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-content: start;
+}
+
+.work-supporting > div:first-child {
+  grid-column: 1 / -1;
+}
+
+.work-supporting > div:not(:first-child) .work-image-small {
+  aspect-ratio: 4 / 3;
 }
 
 .work-compact-copy {
@@ -487,10 +497,6 @@ textarea:focus-visible {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.6;
-}
-
-.crop-2 img {
-  object-position: 72% center;
 }
 
 .text-link {
@@ -996,6 +1002,10 @@ footer {
   .work-supporting {
     grid-template-columns: 1fr;
     gap: 52px;
+  }
+
+  .work-supporting > div:first-child {
+    grid-column: auto;
   }
 
   .work-copy {

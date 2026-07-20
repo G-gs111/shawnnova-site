@@ -178,7 +178,7 @@ git commit -m "feat: present four active building directions"
 - Consumes: four `#work article` elements rendered in source order
 - Produces: two-column supporting grid on desktop and single-column project flow below 768px
 
-- [ ] **Step 1: Write a failing desktop and mobile layout test**
+- [x] **Step 1: Write a failing desktop and mobile layout test**
 
 Add assertions that desktop renders four articles, two supporting columns, and a full-row first supporting card:
 
@@ -206,7 +206,7 @@ await expect(page.locator(".work-supporting > div").first()).toHaveCSS(
 );
 ```
 
-- [ ] **Step 2: Run the layout test and verify RED**
+- [x] **Step 2: Run the layout test and verify RED**
 
 Run:
 
@@ -216,7 +216,7 @@ pnpm test:e2e --grep "asymmetric experience rail|mobile viewport"
 
 Expected: desktop FAIL because `.work-supporting` currently has only one column above 900px and its first child does not span columns.
 
-- [ ] **Step 3: Implement the grid hierarchy**
+- [x] **Step 3: Implement the grid hierarchy**
 
 Update the desktop rules to:
 
@@ -245,7 +245,7 @@ Keep the existing `max-width: 900px` one-column outer work grid and two-column s
 
 Remove the old `.crop-2 img` override because the new centered automation image should retain its center crop.
 
-- [ ] **Step 4: Run the layout test and verify GREEN**
+- [x] **Step 4: Run the layout test and verify GREEN**
 
 Run:
 
@@ -255,7 +255,7 @@ pnpm test:e2e --grep "asymmetric experience rail|mobile viewport"
 
 Expected: desktop and mobile variants pass with no horizontal overflow.
 
-- [ ] **Step 5: Commit the layout change**
+- [x] **Step 5: Commit the layout change**
 
 ```bash
 git add src/app/globals.css tests/e2e/home.spec.ts
