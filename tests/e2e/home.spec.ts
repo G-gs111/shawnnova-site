@@ -8,7 +8,14 @@ test("presents Shawnnova's identity, work and contact path", async ({ page }) =>
   ).toBeVisible();
   await expect(page.getByText("葛少玉", { exact: true }).first()).toBeVisible();
   await expect(page.getByText("Shawnnova", { exact: true }).last()).toBeVisible();
-  await expect(page.locator("#work")).toContainText("AI 视频工具");
+  for (const title of [
+    "带货短视频达人工具网站",
+    "AI 混剪工具",
+    "个人站开发",
+    "企业自动化工作流开发",
+  ]) {
+    await expect(page.locator("#work")).toContainText(title);
+  }
   await expect(page.locator("#experience")).toContainText("运营");
   await expect(page.locator("#experience")).toContainText("销售");
   await expect(page.locator("#experience")).toContainText("产品开发");

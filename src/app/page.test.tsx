@@ -19,9 +19,10 @@ describe("HomePage", () => {
     expect(document.querySelector("#approach")).toBeInTheDocument();
     expect(document.querySelector("#contact")).toBeInTheDocument();
     expect(screen.getByText("功不唐捐，玉汝于成")).toBeInTheDocument();
-    expect(screen.getByText("AI 视频工具")).toBeInTheDocument();
-    expect(screen.getByText("桌面端体验")).toBeInTheDocument();
-    expect(screen.getByText("持续实验")).toBeInTheDocument();
+    expect(screen.getByText("带货短视频达人工具网站")).toBeInTheDocument();
+    expect(screen.getByText("AI 混剪工具")).toBeInTheDocument();
+    expect(screen.getByText("个人站开发")).toBeInTheDocument();
+    expect(screen.getByText("企业自动化工作流开发")).toBeInTheDocument();
     expect(screen.getByText("运营")).toBeInTheDocument();
     expect(screen.getByText("销售")).toBeInTheDocument();
     expect(screen.getByText("产品开发")).toBeInTheDocument();

@@ -82,7 +82,7 @@ git commit -m "feat: add imagery for new building directions"
 **Interfaces:**
 - Produces: `siteContent.work`, a four-item readonly array consumed unchanged by `WorkSection`
 
-- [ ] **Step 1: Write failing content and page tests**
+- [x] **Step 1: Write failing content and page tests**
 
 Change the work assertions to require exactly these titles and image paths:
 
@@ -104,7 +104,7 @@ expect(new Set(siteContent.work.map((item) => item.image)).size).toBe(4);
 
 Update the page test to query all four titles and update the first Playwright test to require all four titles inside `#work`.
 
-- [ ] **Step 2: Run the focused tests and verify RED**
+- [x] **Step 2: Run the focused tests and verify RED**
 
 Run:
 
@@ -114,7 +114,7 @@ pnpm test src/content/site.test.ts src/app/page.test.tsx
 
 Expected: FAIL because `siteContent.work` still contains the previous three records.
 
-- [ ] **Step 3: Implement the four approved content records**
+- [x] **Step 3: Implement the four approved content records**
 
 Replace `siteContent.work` with:
 
@@ -151,7 +151,7 @@ work: [
 ],
 ```
 
-- [ ] **Step 4: Run the focused tests and verify GREEN**
+- [x] **Step 4: Run the focused tests and verify GREEN**
 
 Run:
 
@@ -161,7 +161,7 @@ pnpm test src/content/site.test.ts src/app/page.test.tsx
 
 Expected: both test files pass.
 
-- [ ] **Step 5: Commit the content change**
+- [x] **Step 5: Commit the content change**
 
 ```bash
 git add src/content/site.ts src/content/site.test.ts src/app/page.test.tsx tests/e2e/home.spec.ts

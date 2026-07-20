@@ -17,13 +17,20 @@ describe("siteContent", () => {
       image: "/images/shawnnova-hero-studio-v2.webp",
       alt: "创作者从侧后方坐在工作室中，将产品草图做成数字原型",
     });
-    expect(siteContent.work).toHaveLength(3);
+    expect(siteContent.work).toHaveLength(4);
+    expect(siteContent.work.map((item) => item.title)).toEqual([
+      "带货短视频达人工具网站",
+      "AI 混剪工具",
+      "个人站开发",
+      "企业自动化工作流开发",
+    ]);
     expect(siteContent.work.map((item) => item.image)).toEqual([
+      "/images/shawnnova-commerce-creator-v2.webp",
       "/images/shawnnova-video-workflow-v2.webp",
       "/images/shawnnova-desktop-product-v2.webp",
-      "/images/shawnnova-experiment-lab-v2.webp",
+      "/images/shawnnova-business-automation-v2.webp",
     ]);
-    expect(new Set(siteContent.work.map((item) => item.image)).size).toBe(3);
+    expect(new Set(siteContent.work.map((item) => item.image)).size).toBe(4);
     expect(siteContent.work.every((item) => item.alt.length > 10)).toBe(true);
     expect(siteContent.tools.map((item) => item.label)).toEqual([
       "Codex",
