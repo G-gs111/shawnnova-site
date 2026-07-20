@@ -273,7 +273,6 @@ export function ToolStrip() {
   return (
     <section className="tool-strip section-shell" aria-labelledby="tools-title">
       <div className="tool-strip-heading">
-        <p className="section-kicker">Daily stack</p>
         <h2 id="tools-title">常用工具</h2>
       </div>
       <ul className="tool-list" aria-label="常用工具列表">
@@ -373,7 +372,7 @@ expect(toolColumns).toHaveLength(6);
 
 - [ ] **Step 2: Run the desktop E2E tests and verify style failure**
 
-Run: `pnpm test:e2e -- --project=desktop-chrome --grep "identity|asymmetric"`
+Run: `pnpm test:e2e --project=desktop-chrome --grep "identity|asymmetric"`
 
 Expected: the visibility assertion passes after Task 3, while the tool grid assertion fails until CSS is added.
 
@@ -390,10 +389,6 @@ Insert after `.motto-band p::after` in `src/app/globals.css`:
   padding-block: 28px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-}
-
-.tool-strip-heading .section-kicker {
-  margin-bottom: 7px;
 }
 
 .tool-strip-heading h2 {
@@ -432,11 +427,23 @@ Insert after `.motto-band p::after` in `src/app/globals.css`:
   box-shadow: inset 0 0 0 1px var(--accent);
 }
 
-.tool-list svg {
+.tool-list svg,
+.tool-logo {
   width: 20px;
   height: 20px;
   flex: 0 0 auto;
+}
+
+.tool-list svg path,
+.tool-list svg stop {
   fill: currentColor;
+  stop-color: currentColor;
+}
+
+.tool-logo-feishu {
+  background: currentColor;
+  mask: url("/images/feishu-tool-logo.png") center / contain no-repeat;
+  -webkit-mask: url("/images/feishu-tool-logo.png") center / contain no-repeat;
 }
 
 .tool-list span {
@@ -486,11 +493,11 @@ Inside `@media (max-width: 767px)`, add:
 
 - [ ] **Step 5: Run targeted E2E tests**
 
-Run: `pnpm test:e2e -- --project=desktop-chrome --grep "identity|asymmetric"`
+Run: `pnpm test:e2e --project=desktop-chrome --grep "identity|asymmetric"`
 
 Expected: PASS, including exactly six desktop grid columns.
 
-Run: `pnpm test:e2e -- --project=mobile-chrome --grep "viewport|identity"`
+Run: `pnpm test:e2e --project=mobile-chrome --grep "viewport|identity"`
 
 Expected: PASS with no horizontal overflow and all six tool names visible.
 

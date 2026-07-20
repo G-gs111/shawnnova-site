@@ -15,6 +15,18 @@ test("presents Shawnnova's identity, work and contact path", async ({ page }) =>
   await expect(page.locator("#experience")).toContainText("Vibe Coding");
   await expect(page.locator("#approach")).toContainText("理解");
   await expect(page.locator(".motto-band")).toContainText("功不唐捐，玉汝于成");
+  const toolStrip = page.getByRole("region", { name: "常用工具" });
+  await expect(toolStrip).toBeVisible();
+  for (const label of [
+    "Codex",
+    "飞书",
+    "GitHub",
+    "VS Code",
+    "Cloudflare",
+    "Vercel",
+  ]) {
+    await expect(toolStrip.getByText(label, { exact: true })).toBeVisible();
+  }
 
   await expect(
     page.locator("#contact").getByRole("link", { name: /shawnnovags111@gmail.com/i }),
@@ -36,6 +48,12 @@ test("uses an asymmetric experience rail and a two-column contact layout on desk
 
   await expect(page.locator(".experience-section")).toHaveCSS("display", "grid");
   await expect(page.locator(".contact-layout")).toHaveCSS("display", "grid");
+  await expect(page.locator(".tool-list")).toHaveCSS("display", "grid");
+
+  const toolColumns = await page.locator(".tool-list").evaluate((element) =>
+    getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean),
+  );
+  expect(toolColumns).toHaveLength(6);
 
   const contactColumns = await page.locator(".contact-layout").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean),

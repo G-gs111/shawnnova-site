@@ -14,7 +14,6 @@ export function ToolStrip() {
   return (
     <section className="tool-strip section-shell" aria-labelledby="tools-title">
       <div className="tool-strip-heading">
-        <p className="section-kicker">Daily stack</p>
         <h2 id="tools-title">常用工具</h2>
       </div>
 
