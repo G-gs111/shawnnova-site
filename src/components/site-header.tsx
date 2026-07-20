@@ -1,4 +1,4 @@
-import { ArrowUpRight, GithubLogo } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 
 import { siteContent } from "@/content/site";
 
@@ -20,13 +20,11 @@ export function SiteHeader() {
 
       <a
         className="header-link"
-        href={siteContent.contact.href}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="访问 Shawnnova 的 GitHub"
+        href={`mailto:${siteContent.contact.email}`}
+        aria-label={`发送邮件至 ${siteContent.contact.email}`}
       >
-        <GithubLogo size={20} weight="regular" aria-hidden="true" />
-        <span>GitHub</span>
+        <EnvelopeSimple size={20} weight="regular" aria-hidden="true" />
+        <span>联系我</span>
         <ArrowUpRight size={15} weight="regular" aria-hidden="true" />
       </a>
     </header>

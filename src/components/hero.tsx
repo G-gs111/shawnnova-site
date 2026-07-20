@@ -13,6 +13,7 @@ export function Hero() {
         </p>
         <h1>{siteContent.identity.headline}</h1>
         <p className="hero-introduction">{siteContent.identity.introduction}</p>
+        <p className="hero-motto">{siteContent.identity.motto}</p>
         <div className="hero-actions">
           <a className="button button-primary" href="#work">
             查看作品
@@ -20,7 +21,7 @@ export function Hero() {
           </a>
           <a
             className="button button-secondary"
-            href={siteContent.contact.href}
+            href={siteContent.contact.github}
             target="_blank"
             rel="noreferrer"
           >

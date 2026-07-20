@@ -58,7 +58,7 @@ export function WorkSection() {
 
       <a
         className="text-link"
-        href={siteContent.contact.href}
+        href={siteContent.contact.github}
         target="_blank"
         rel="noreferrer"
       >
