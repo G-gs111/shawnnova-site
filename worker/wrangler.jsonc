@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/wrangler.json",
+  "name": "shawnnova-contact-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-20",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "shawnnova-leads",
+      "database_id": "34f45135-95e8-4362-9ac9-d61c22b0d863"
+    }
+  ],
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "2797375316@qq.com"
+    }
+  ],
+  "vars": {
+    "NOTIFICATION_FROM": "website@260604.xyz",
+    "NOTIFICATION_TO": "2797375316@qq.com"
+  }
+}

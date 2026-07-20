@@ -4,5 +4,6 @@ node_modules/
 artifacts/
 playwright-report/
 test-results/
+worker/dist/
 .vercel/
 .DS_Store
