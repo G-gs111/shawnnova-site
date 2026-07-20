@@ -13,7 +13,26 @@ describe("siteContent", () => {
       "产品开发",
       "Vibe Coding",
     ]);
+    expect(siteContent.heroVisual).toEqual({
+      image: "/images/shawnnova-hero-studio-v2.webp",
+      alt: "创作者从侧后方坐在工作室中，将产品草图做成数字原型",
+    });
     expect(siteContent.work).toHaveLength(3);
+    expect(siteContent.work.map((item) => item.image)).toEqual([
+      "/images/shawnnova-video-workflow-v2.webp",
+      "/images/shawnnova-desktop-product-v2.webp",
+      "/images/shawnnova-experiment-lab-v2.webp",
+    ]);
+    expect(new Set(siteContent.work.map((item) => item.image)).size).toBe(3);
+    expect(siteContent.work.every((item) => item.alt.length > 10)).toBe(true);
+    expect(siteContent.tools.map((item) => item.label)).toEqual([
+      "Codex",
+      "飞书",
+      "GitHub",
+      "VS Code",
+      "Cloudflare",
+      "Vercel",
+    ]);
     expect(siteContent.contact.email).toBe("shawnnovags111@gmail.com");
     expect(siteContent.contact.phone).toBe("18379582410");
     expect(siteContent.contact.github).toBe("https://github.com/G-gs111");
