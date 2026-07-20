@@ -3,6 +3,12 @@
   "name": "shawnnova-contact-api",
   "main": "src/index.ts",
   "compatibility_date": "2026-07-20",
+  "routes": [
+    {
+      "pattern": "contact-api.260604.xyz",
+      "custom_domain": true
+    }
+  ],
   "d1_databases": [
     {
       "binding": "DB",
