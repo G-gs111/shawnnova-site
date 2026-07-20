@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "vitest run",
+    "test:worker": "vitest run --config worker/vitest.config.ts",
     "test:watch": "vitest",
     "test:e2e": "playwright test"
   },
