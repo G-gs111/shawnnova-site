@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:sites": "node scripts/build-sites.mjs",
     "build:worker": "node worker/build.mjs",
     "deploy:worker": "wrangler deploy --config worker/wrangler.jsonc",
     "deploy:site": "vercel --prod",
