@@ -1,6 +1,6 @@
 # Design QA
 
-Status: in progress, local Chrome checks passed; production check pending
+Status: passed in the user's Chrome on local and production builds
 
 Date: 2026-07-22
 
@@ -24,8 +24,12 @@ Date: 2026-07-22
 - Empty-form submission produced three inline validation messages and a live status message.
 - No page console errors were recorded.
 
-## Remaining production check
+## Production verification
 
-- Verify the production Turnstile widget after Vercel injects its environment key.
-- Recheck the final `https://260604.xyz` hero, project section, mobile overflow and contact form without sending a duplicate message.
+- Verified `https://260604.xyz` at 1202 x 716 and 390 x 844 in the user's Chrome.
+- Confirmed the production headline, four project cards, active project navigation and pointer-following hero mask.
+- Confirmed the anonymized client label is present and the private project name is absent.
+- Confirmed the Cloudflare Turnstile widget is visible in the production contact form without submitting a duplicate message.
+- Confirmed no horizontal overflow at either viewport.
 - Reset the temporary Chrome mobile viewport override after verification.
+- Saved and deployed Sites version 1 as an owner-only checkpoint at `https://shawnnova-portfolio-check.wustwkdzs-2719.chatgpt.site`.
