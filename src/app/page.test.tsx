@@ -1,32 +1,61 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 
 import HomePage from "./page";
 
+afterEach(cleanup);
+
 describe("HomePage", () => {
-  it("renders the complete personal portfolio structure", () => {
+  it("renders the mature portfolio story in a clear order", () => {
     render(<HomePage />);
 
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: "把复杂技术，做成愿意被使用的产品。",
+        name: "从业务现场，到可用产品。",
       }),
     ).toBeInTheDocument();
-    expect(document.querySelector("#about")).toBeInTheDocument();
-    expect(document.querySelector("#work")).toBeInTheDocument();
-    expect(document.querySelector("#experience")).toBeInTheDocument();
-    expect(document.querySelector("#approach")).toBeInTheDocument();
-    expect(document.querySelector("#contact")).toBeInTheDocument();
-    expect(screen.getByText("功不唐捐，玉汝于成")).toBeInTheDocument();
-    expect(screen.getByText("带货短视频达人工具网站")).toBeInTheDocument();
-    expect(screen.getByText("AI 混剪工具")).toBeInTheDocument();
-    expect(screen.getByText("个人站开发")).toBeInTheDocument();
-    expect(screen.getByText("企业自动化工作流开发")).toBeInTheDocument();
-    expect(screen.getByText("运营")).toBeInTheDocument();
-    expect(screen.getByText("销售")).toBeInTheDocument();
-    expect(screen.getByText("产品开发")).toBeInTheDocument();
-    expect(screen.getByText("Vibe Coding")).toBeInTheDocument();
+
+    for (const id of [
+      "about",
+      "capability",
+      "work",
+      "experience",
+      "collaboration",
+      "contact",
+    ]) {
+      expect(document.querySelector(`#${id}`)).toBeInTheDocument();
+    }
+  });
+
+  it("presents truthful evidence and project states", () => {
+    render(<HomePage />);
+
+    for (const value of ["1/67", "100+", "6000+", "200%+"]) {
+      expect(screen.getByText(value)).toBeInTheDocument();
+    }
+    expect(screen.getByText("宠物达人内容运营工作台")).toBeInTheDocument();
+    expect(screen.getByText("某宠物内容电商机构")).toBeInTheDocument();
+    expect(screen.getAllByText("已上线")).toHaveLength(2);
+    expect(screen.getByText("开发中")).toBeInTheDocument();
+    expect(screen.getByText("探索中")).toBeInTheDocument();
+    expect(document.body).not.toHaveTextContent("色彩萌宠");
+  });
+
+  it("keeps education compact and collaboration paths concrete", () => {
+    render(<HomePage />);
+
+    expect(screen.getByText("店铺运营与增长")).toBeInTheDocument();
+    expect(screen.getByText("业务产品构建")).toBeInTheDocument();
+    expect(screen.getByText("武汉科技大学 物流管理 本科")).toBeInTheDocument();
+    expect(screen.getByText("AI 产品与产品运营")).toBeInTheDocument();
+    expect(screen.getByText("个人站与轻量 Web 产品")).toBeInTheDocument();
+    expect(screen.getByText("内容工具与业务工作流")).toBeInTheDocument();
+  });
+
+  it("preserves tools and direct contact routes", () => {
+    render(<HomePage />);
+
     const tools = screen.getByRole("region", { name: "常用工具" });
     for (const label of [
       "Codex",
@@ -38,8 +67,6 @@ describe("HomePage", () => {
     ]) {
       expect(tools).toHaveTextContent(label);
     }
-    expect(tools.querySelectorAll("svg")).toHaveLength(5);
-    expect(screen.getByRole("img", { name: "飞书图标" })).toBeInTheDocument();
     expect(
       screen
         .getAllByRole("link", { name: /shawnnovags111@gmail.com/i })

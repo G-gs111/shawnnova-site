@@ -19,7 +19,7 @@ export function ContactSection() {
       <div className="contact-layout">
         <div className="contact-main">
           <p>{siteContent.contact.note}</p>
-          <h2>一起做点值得留下的东西。</h2>
+          <h2>如果方向合适，我们可以直接聊。</h2>
           <div className="contact-routes">
             <a className="contact-link" href={`mailto:${siteContent.contact.email}`}>
               <EnvelopeSimple size={24} weight="regular" aria-hidden="true" />
@@ -45,7 +45,7 @@ export function ContactSection() {
         </div>
 
         <div className="contact-panel">
-          <h3>也可以让我来联系你。</h3>
+          <h3>留下联系方式，我来联系你。</h3>
           <ContactForm endpoint={endpoint} turnstileSiteKey={turnstileSiteKey} />
         </div>
       </div>

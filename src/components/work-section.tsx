@@ -5,66 +5,55 @@ import { Reveal } from "@/components/motion/reveal";
 import { siteContent } from "@/content/site";
 
 export function WorkSection() {
-  const [featured, ...supporting] = siteContent.work;
-
   return (
     <section className="work-section section-shell" id="work">
-      <div className="section-heading vertical-heading">
-        <h2>正在构建</h2>
-        <p>技术不是展示品。它应该缩短路径，解决问题，并留下清晰的使用感受。</p>
+      <div className="section-heading section-heading-work">
+        <h2>代表项目</h2>
+        <p>项目是否成熟，先看状态是否真实，再看它解决了什么问题。</p>
       </div>
 
-      <div className="work-grid">
-        <Reveal className="work-featured">
-          <article>
-            <div className="work-image work-image-large">
-              <Image
-                src={featured.image}
-                alt={featured.alt}
-                fill
-                sizes="(max-width: 767px) 100vw, 66vw"
-              />
-            </div>
-            <div className="work-copy">
-              <span>{featured.kind}</span>
-              <h3>{featured.title}</h3>
-              <p>{featured.description}</p>
-            </div>
-          </article>
-        </Reveal>
+      <div className="project-list">
+        {siteContent.work.map((item, index) => (
+          <Reveal delay={index * 0.05} key={item.title}>
+            <article className="project-card">
+              <div className="project-media">
+                <Image
+                  src={item.image}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 767px) 100vw, 44vw"
+                />
+              </div>
 
-        <div className="work-supporting">
-          {supporting.map((item, index) => (
-            <Reveal delay={index * 0.08} key={item.title}>
-              <article className="work-compact">
-                <div className={`work-image work-image-small crop-${index + 1}`}>
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    fill
-                    sizes="(max-width: 767px) 100vw, 32vw"
-                  />
+              <div className="project-copy">
+                <div className="project-meta">
+                  <span>{item.status}</span>
+                  <span>{item.client}</span>
                 </div>
-                <div className="work-compact-copy">
-                  <span>{item.kind}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+                <h3>{item.title}</h3>
+                <p className="project-description">{item.description}</p>
+                <p className="project-outcome">{item.outcome}</p>
+                <ul className="project-features" aria-label={`${item.title}能力`}>
+                  {item.features.map((feature) => (
+                    <li key={feature}>{feature}</li>
+                  ))}
+                </ul>
+                {"href" in item ? (
+                  <a
+                    className="project-link"
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    查看线上版本
+                    <ArrowUpRight size={18} weight="regular" aria-hidden="true" />
+                  </a>
+                ) : null}
+              </div>
+            </article>
+          </Reveal>
+        ))}
       </div>
-
-      <a
-        className="text-link"
-        href={siteContent.contact.github}
-        target="_blank"
-        rel="noreferrer"
-      >
-        GitHub
-        <ArrowUpRight size={18} weight="regular" aria-hidden="true" />
-      </a>
     </section>
   );
 }

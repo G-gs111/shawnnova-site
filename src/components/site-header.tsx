@@ -1,5 +1,6 @@
 import { ArrowUpRight, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 
+import { ActiveNav } from "@/components/active-nav";
 import { siteContent } from "@/content/site";
 
 export function SiteHeader() {
@@ -10,13 +11,7 @@ export function SiteHeader() {
         <span className="brand-alias">{siteContent.identity.alias}</span>
       </a>
 
-      <nav className="desktop-nav" aria-label="主要导航">
-        {siteContent.navigation.map((item) => (
-          <a key={item.href} href={item.href}>
-            {item.label}
-          </a>
-        ))}
-      </nav>
+      <ActiveNav items={siteContent.navigation} />
 
       <a
         className="header-link"

@@ -1,36 +1,34 @@
-import { ArrowDown, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowDown } from "@phosphor-icons/react/dist/ssr";
 
-import { HeroVisual } from "@/components/motion/hero-visual";
-import { Reveal } from "@/components/motion/reveal";
+import { HeroMask } from "@/components/hero-mask";
 import { siteContent } from "@/content/site";
 
 export function Hero() {
   return (
     <section className="hero section-shell" id="about">
-      <Reveal className="hero-copy">
-        <p className="hero-eyebrow">
-          {siteContent.identity.alias} / {siteContent.identity.role}
-        </p>
-        <h1>{siteContent.identity.headline}</h1>
-        <p className="hero-introduction">{siteContent.identity.introduction}</p>
-        <div className="hero-actions">
-          <a className="button button-primary" href="#work">
-            查看作品
-            <ArrowDown size={17} weight="regular" aria-hidden="true" />
-          </a>
-          <a
-            className="button button-secondary"
-            href={siteContent.contact.github}
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-            <ArrowUpRight size={17} weight="regular" aria-hidden="true" />
-          </a>
-        </div>
-      </Reveal>
+      <HeroMask image={siteContent.heroVisual.image}>
+        <div className="hero-layout">
+          <div className="hero-copy">
+            <p className="hero-eyebrow">{siteContent.identity.role}</p>
+            <h1>{siteContent.identity.headline}</h1>
+            <p className="hero-introduction">
+              {siteContent.identity.introduction}
+            </p>
+          </div>
 
-      <HeroVisual />
+          <div className="hero-name" aria-hidden="true">
+            <span>SHAWN</span>
+            <span>NOVA</span>
+          </div>
+        </div>
+      </HeroMask>
+
+      <div className="hero-actions">
+        <a className="button button-primary" href="#work">
+          查看项目
+          <ArrowDown size={17} weight="regular" aria-hidden="true" />
+        </a>
+      </div>
     </section>
   );
 }
