@@ -1,0 +1,75 @@
+:root {
+  --color-paper: oklch(96.8% 0.009 82);
+  --color-paper-raised: oklch(93.5% 0.012 82);
+  --color-paper-strong: oklch(89.5% 0.014 82);
+  --color-paper-2: var(--color-paper-raised);
+  --color-paper-3: var(--color-paper-strong);
+  --color-ink: oklch(18.5% 0.012 62);
+  --color-ink-soft: oklch(34% 0.015 62);
+  --color-ink-muted: oklch(43% 0.014 62);
+  --color-rule: oklch(78% 0.014 75);
+  --color-rule-strong: oklch(61% 0.018 62);
+  --color-accent: oklch(54% 0.105 45);
+  --color-accent-strong: oklch(44% 0.1 45);
+  --color-accent-soft: oklch(89% 0.035 55);
+  --color-focus: oklch(49% 0.13 45);
+  --color-dark: oklch(15% 0.01 60);
+  --color-dark-raised: oklch(20% 0.014 60);
+  --color-dark-rule: oklch(38% 0.014 60);
+  --color-dark-rule-subtle: oklch(34% 0.014 60);
+  --color-dark-rule-strong: oklch(48% 0.018 60);
+  --color-shadow: oklch(12% 0.01 60 / 0.16);
+  --color-on-dark: oklch(93% 0.01 82);
+  --color-on-dark-muted: oklch(76% 0.012 82);
+  --color-on-accent: oklch(98% 0.006 83);
+  --color-accent-ink: var(--color-on-accent);
+  --color-success: oklch(47% 0.13 148);
+  --color-error: oklch(52% 0.17 28);
+
+  --font-display: var(--font-geist), system-ui, sans-serif;
+  --font-body: var(--font-geist), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: clamp(1.05rem, 1rem + 0.25vw, 1.25rem);
+  --text-xl: clamp(1.3rem, 1.1rem + 0.75vw, 1.8rem);
+  --text-2xl: clamp(2rem, 1.5rem + 2.1vw, 4rem);
+  --text-display: clamp(3rem, 2rem + 4.2vw, 5.25rem);
+  --text-metric: clamp(2rem, 1.6rem + 1.7vw, 3.75rem);
+
+  --line-tight: 0.94;
+  --line-snug: 1.12;
+  --line-body: 1.7;
+  --tracking-tight: -0.055em;
+  --tracking-label: 0.1em;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-round: 999px;
+  --rule: 1px;
+  --content-max: 90rem;
+  --reading-max: 44rem;
+
+  --duration-fast: 160ms;
+  --duration-base: 260ms;
+  --duration-slow: 520ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --z-nav: 50;
+}

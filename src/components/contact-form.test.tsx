@@ -41,6 +41,22 @@ describe("ContactForm", () => {
     expect(screen.getByText("提交前请确认联系授权。")).toBeVisible();
   });
 
+  it("provides an English form and English validation", async () => {
+    render(
+      <ContactForm
+        endpoint="https://contact-api.260604.xyz"
+        turnstileSiteKey="test-site-key"
+        locale="en"
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Leave my details" }));
+
+    expect(await screen.findByText("Please tell me your name.")).toBeVisible();
+    expect(screen.getByText("Please leave at least one way to reach you.")).toBeVisible();
+    expect(screen.getByText("Please confirm consent before submitting.")).toBeVisible();
+  });
+
   it("initializes Turnstile when the API becomes available after mount", async () => {
     window.turnstile = undefined;
     const renderWidget = vi.fn(

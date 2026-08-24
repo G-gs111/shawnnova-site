@@ -12,6 +12,7 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "vitest run",
+    "check:content": "node scripts/check-portfolio-content.mjs",
     "test:worker": "vitest run --config worker/vitest.config.ts",
     "test:watch": "vitest",
     "test:e2e": "playwright test"

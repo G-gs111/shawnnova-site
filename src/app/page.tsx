@@ -1,23 +1,14 @@
-import { ApproachSection } from "@/components/approach-section";
-import { ContactSection } from "@/components/contact-section";
-import { ExperienceSection } from "@/components/experience-section";
-import { Hero } from "@/components/hero";
-import { MetricsSection } from "@/components/metrics-section";
-import { SiteHeader } from "@/components/site-header";
-import { WorkSection } from "@/components/work-section";
+import type { Metadata } from "next";
+
+import { PortfolioHome } from "@/components/fde/portfolio-home";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+    languages: { "zh-CN": "/", en: "/en" },
+  },
+};
 
 export default function HomePage() {
-  return (
-    <>
-      <SiteHeader />
-      <main>
-        <Hero />
-        <MetricsSection />
-        <WorkSection />
-        <ExperienceSection />
-        <ApproachSection />
-        <ContactSection />
-      </main>
-    </>
-  );
+  return <PortfolioHome locale="zh" />;
 }

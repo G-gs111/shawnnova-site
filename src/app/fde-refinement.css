@@ -1,0 +1,1108 @@
+/* Hallmark · macrostructure: Feature Stack · H3 hero: split copy + semantic relay · nav: N5 · footer: Ft1
+ * Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V5
+ * theme: studied-DNA (source: ThreeUI + Lius Node) · limestone / charcoal / dark copper
+ * contrast: pass (40–41) · slop: pass (42–45) · honest: pass (46) · chrome: pass (47)
+ * tokens: pass (48) · responsive: pass (49) · icons: pass (30) · mobile: pass (34, 49, 50–57)
+ */
+
+body:has(.fde-site)::before {
+  display: none;
+}
+
+.fde-site {
+  --panel-radius: 0.375rem;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.fde-site :focus-visible {
+  outline-color: var(--color-focus);
+}
+
+.fde-nav-shell,
+.fde-nav-shell.is-compact {
+  top: var(--space-4);
+  width: min(calc(100% - var(--space-8)), 62rem);
+  transition: none;
+}
+
+.fde-nav,
+.fde-nav-shell.is-compact .fde-nav {
+  min-height: 3.75rem;
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-5);
+  border: 1px solid var(--color-dark-raised);
+  border-radius: var(--radius-round);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  box-shadow: 0 0.75rem 2rem var(--color-shadow);
+  backdrop-filter: none;
+}
+
+.fde-wordmark small,
+.fde-nav-links {
+  color: var(--color-on-dark-muted);
+}
+
+.fde-dock-item {
+  --dock-strength: 0;
+  transform: translateY(calc(var(--dock-strength) * -0.25rem));
+  transform-origin: 50% 100%;
+  transition: transform 180ms var(--ease-out), color 180ms var(--ease-standard);
+}
+
+.fde-nav-cta {
+  border-color: var(--color-accent);
+  border-radius: var(--radius-round);
+  background: var(--color-accent);
+  color: var(--color-on-accent) !important;
+}
+
+.fde-nav-cta:hover {
+  background: var(--color-accent-strong);
+}
+
+.fde-hero {
+  min-height: 92svh;
+  padding-top: 6.5rem;
+  padding-bottom: 8.5rem;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.fde-kicker,
+.fde-section-kicker {
+  color: var(--color-accent-strong);
+  font-family: var(--font-body);
+  letter-spacing: 0.08em;
+}
+
+.fde-nav-links,
+.fde-nav-actions,
+.fde-signal-index,
+.fde-signal-copy small,
+.fde-metric > span,
+.fde-experience-facts span {
+  font-family: var(--font-body);
+}
+
+.fde-hero h1,
+.fde-site.is-zh .fde-hero h1 {
+  max-width: 10ch;
+  font-size: var(--text-display);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
+}
+
+.fde-hero-english {
+  max-width: 29rem;
+  color: var(--color-ink-soft);
+  font-weight: 500;
+}
+
+.fde-hero-summary {
+  max-width: 34rem;
+  font-size: 1.0625rem;
+}
+
+.fde-button,
+.fde-text-link {
+  min-height: 3.125rem;
+}
+
+.fde-button-primary {
+  border-color: var(--color-dark);
+  border-radius: var(--panel-radius);
+  background: var(--color-dark);
+  color: var(--color-on-dark) !important;
+}
+
+.fde-button-primary:hover {
+  background: var(--color-accent-strong);
+}
+
+.fde-hero-visual {
+  min-height: 28rem;
+}
+
+.fde-network {
+  --color-ink: var(--color-on-dark);
+  --color-ink-soft: var(--color-on-dark-muted);
+  --color-ink-muted: var(--color-on-dark-muted);
+  --color-rule: var(--color-dark-rule-subtle);
+  --color-rule-strong: var(--color-dark-rule-strong);
+  min-height: 28rem;
+  overflow: hidden;
+  border: 1px solid var(--color-dark-raised);
+  border-radius: var(--panel-radius);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.fde-network::before {
+  top: var(--space-5);
+  left: var(--space-5);
+  color: var(--color-on-dark-muted);
+  content: "SYSTEM RELAY / LIVE";
+}
+
+.fde-network-status {
+  position: absolute;
+  z-index: 2;
+  top: var(--space-5);
+  right: var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-on-dark-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+}
+
+.fde-network-status span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.fde-network-control {
+  position: absolute;
+  z-index: 3;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  min-height: 2.5rem;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-rule-strong);
+  border-radius: var(--panel-radius);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-dark-raised);
+  color: var(--color-on-dark);
+  font: 500 0.75rem/1 var(--font-mono);
+  cursor: pointer;
+}
+
+.fde-network-control:hover {
+  border-color: var(--color-accent);
+}
+
+.fde-network-control:active {
+  background: var(--color-dark);
+}
+
+.fde-network-control:disabled,
+.fde-signal-selector button:disabled,
+.fde-pipeline-node button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.fde-network canvas {
+  inset: 4.5rem var(--space-5) 7rem;
+  width: calc(100% - 2.5rem);
+  height: calc(100% - 11.5rem);
+}
+
+.fde-network-caption {
+  right: 9.5rem;
+  bottom: var(--space-5);
+  left: var(--space-5);
+  color: var(--color-on-dark-muted);
+}
+
+.fde-network-caption span {
+  color: var(--color-on-dark-muted);
+}
+
+.fde-network-caption i {
+  color: var(--color-accent);
+}
+
+.fde-metrics {
+  padding-bottom: var(--space-8);
+  border-top: 1px solid var(--color-rule-strong);
+  border-bottom: 1px solid var(--color-rule-strong);
+  background: var(--color-paper-raised);
+}
+
+.fde-metric {
+  min-height: 11rem;
+}
+
+.fde-metric strong,
+.fde-experience-facts strong,
+.fde-case-results dd,
+.fde-signal-diagnostic dd {
+  font-variant-numeric: tabular-nums;
+}
+
+.fde-section {
+  padding-top: clamp(6rem, 11vw, 10rem);
+  padding-bottom: clamp(5rem, 9vw, 8rem);
+}
+
+.fde-section-heading {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-8);
+  padding-bottom: var(--space-12);
+  border-bottom-color: var(--color-rule-strong);
+}
+
+.fde-section-heading h2 {
+  max-width: 14ch;
+  font-weight: 700;
+}
+
+.fde-section-heading > p:last-child {
+  margin-left: auto;
+  font-size: 1rem;
+}
+
+.fde-method-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid var(--color-rule-strong);
+}
+
+.fde-method-list li {
+  min-height: 23rem;
+  padding: var(--space-8) var(--space-6);
+  border-right: 1px solid var(--color-rule);
+  border-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.fde-method-list li:first-child {
+  padding-left: 0;
+}
+
+.fde-method-list li:last-child {
+  border-right: 0;
+}
+
+.fde-method-list h3 {
+  margin-top: var(--space-12);
+  font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  font-weight: 700;
+}
+
+.fde-method-list strong {
+  margin-top: auto;
+}
+
+.fde-method-list p {
+  margin-top: var(--space-3);
+  font-size: 0.9375rem;
+}
+
+.fde-signal-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(28rem, 1.1fr);
+  gap: var(--space-12);
+}
+
+.fde-signal-selectors {
+  border-top: 1px solid var(--color-rule-strong);
+}
+
+.fde-signal-selector {
+  position: relative;
+  border-bottom: 1px solid var(--color-rule);
+  transition: background-color 180ms var(--ease-standard), border-color 180ms var(--ease-standard);
+}
+
+.fde-signal-selector.is-active {
+  border-bottom-color: var(--color-accent);
+  background: var(--color-paper-raised);
+}
+
+.fde-signal-selector button {
+  width: 100%;
+  padding: var(--space-6) var(--space-12) var(--space-6) var(--space-4);
+  border: 0;
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  gap: var(--space-4);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fde-signal-selector button:hover {
+  color: var(--color-accent-strong);
+}
+
+.fde-signal-selector button:active {
+  background: var(--color-paper-strong);
+}
+
+.fde-signal-selector button::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 0.125rem;
+  background: var(--color-accent);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 180ms var(--ease-out);
+}
+
+.fde-signal-selector.is-active button::before {
+  transform: scaleX(1);
+}
+
+.fde-signal-index,
+.fde-signal-copy small {
+  color: var(--color-ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+}
+
+.fde-signal-copy {
+  min-width: 0;
+}
+
+.fde-signal-copy h3 {
+  margin: var(--space-2) 0 0;
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.fde-signal-copy p {
+  max-width: 34rem;
+  margin: var(--space-3) 0 0;
+  color: var(--color-ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.fde-signal-selector > a {
+  position: absolute;
+  right: var(--space-4);
+  bottom: var(--space-5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-accent-strong);
+  font-size: 0.75rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.fde-signal-selector > a:active {
+  color: var(--color-ink);
+}
+
+.fde-signal-selector > a span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.fde-signal-diagnostic {
+  position: sticky;
+  top: 6.5rem;
+  min-height: 42rem;
+  padding: var(--space-6);
+  align-self: start;
+  border: 1px solid var(--color-dark-raised);
+  border-radius: var(--panel-radius);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  animation: fde-signal-in 180ms var(--ease-out) both;
+}
+
+.fde-signal-diagnostic > header {
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-dark-rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.fde-signal-diagnostic > header span {
+  color: var(--color-on-dark-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.fde-signal-diagnostic > header strong {
+  color: var(--color-accent-soft);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+.fde-signal-diagnostic > dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.fde-signal-diagnostic > dl div {
+  min-height: 8.5rem;
+  padding: var(--space-4) var(--space-3);
+  border-right: 1px solid var(--color-dark-rule);
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+}
+
+.fde-signal-diagnostic > dl div:first-child {
+  padding-left: 0;
+}
+
+.fde-signal-diagnostic > dl div:last-child {
+  border-right: 0;
+}
+
+.fde-signal-diagnostic dt {
+  color: var(--color-on-dark-muted);
+  font-size: 0.75rem;
+}
+
+.fde-signal-diagnostic dd {
+  margin: 0;
+  font: 600 clamp(1.6rem, 3vw, 2.75rem)/1 var(--font-display);
+  letter-spacing: -0.045em;
+}
+
+.fde-signal-diagnostic .fde-system-diagram {
+  margin-top: var(--space-4);
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--color-dark-rule);
+  background: transparent;
+}
+
+.fde-signal-diagnostic .fde-system-diagram figcaption {
+  padding: var(--space-4) 0;
+  border-color: var(--color-dark-rule);
+  color: var(--color-on-dark-muted);
+}
+
+.fde-signal-diagnostic .fde-system-diagram.is-compact ol {
+  display: block;
+}
+
+.fde-signal-diagnostic .fde-system-diagram li {
+  min-height: auto;
+  padding: var(--space-4) 0;
+  border-right: 0;
+  border-bottom: 1px solid var(--color-dark-rule-subtle);
+  display: grid;
+  grid-template-columns: 2.25rem 9rem minmax(0, 1fr);
+  gap: var(--space-3);
+}
+
+.fde-signal-diagnostic .fde-system-diagram li:last-child {
+  border-bottom: 0;
+}
+
+.fde-signal-diagnostic .fde-system-diagram li > span {
+  color: var(--color-accent-soft);
+}
+
+.fde-signal-diagnostic .fde-system-diagram strong {
+  color: var(--color-on-dark);
+}
+
+.fde-signal-diagnostic .fde-system-diagram li p {
+  grid-column: 3;
+  color: var(--color-on-dark-muted);
+}
+
+@keyframes fde-signal-in {
+  from { opacity: 0.72; }
+  to { opacity: 1; }
+}
+
+.fde-experience {
+  background: var(--color-paper-raised);
+}
+
+.fde-experience-facts {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--color-rule-strong);
+  border-bottom: 1px solid var(--color-rule-strong);
+}
+
+.fde-experience-facts article {
+  min-height: 16rem;
+  padding: var(--space-6);
+  border-right: 1px solid var(--color-rule);
+  border-bottom: 0;
+}
+
+.fde-experience-facts article:first-child {
+  padding-left: 0;
+}
+
+.fde-experience-facts article:last-child {
+  border-right: 0;
+}
+
+.fde-delivery-pipeline {
+  border-top: 1px solid var(--color-rule-strong);
+  border-bottom: 1px solid var(--color-rule-strong);
+}
+
+.fde-pipeline-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.fde-pipeline-track::before {
+  position: absolute;
+  top: 2.45rem;
+  right: 10%;
+  left: 10%;
+  height: 1px;
+  background: var(--color-rule-strong);
+  content: "";
+}
+
+.fde-pipeline-node {
+  position: relative;
+  border-right: 1px solid var(--color-rule);
+}
+
+.fde-pipeline-node:last-child {
+  border-right: 0;
+}
+
+.fde-pipeline-node button {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 10rem;
+  padding: var(--space-5);
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-8);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fde-pipeline-node button:hover {
+  color: var(--color-accent-strong);
+}
+
+.fde-pipeline-node button:active {
+  background: var(--color-paper-raised);
+}
+
+.fde-pipeline-node button > span {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--color-rule-strong);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--color-paper);
+  color: var(--color-ink-muted);
+  font: 500 0.625rem/1 var(--font-mono);
+  transition: background-color 180ms var(--ease-standard), color 180ms var(--ease-standard), transform 180ms var(--ease-out);
+}
+
+.fde-pipeline-node.is-active button > span {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  transform: scale(1.08);
+}
+
+.fde-pipeline-node button > strong {
+  max-width: 10ch;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+}
+
+.fde-nav a:active,
+.fde-text-link:active,
+.fde-case-back:active,
+.fde-case-next a:active {
+  opacity: 0.72;
+}
+
+.fde-nav a[aria-disabled="true"] {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.fde-pipeline-detail {
+  min-height: 11rem;
+  padding: var(--space-6);
+  border-top: 1px solid var(--color-rule);
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(24rem, 1.2fr);
+  align-items: center;
+  gap: var(--space-10);
+  background: var(--color-paper-raised);
+}
+
+.fde-pipeline-detail > p {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--color-ink-soft);
+  line-height: 1.65;
+}
+
+.fde-pipeline-detail ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  list-style: none;
+}
+
+.fde-pipeline-detail li {
+  min-height: 3rem;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-rule);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-paper);
+  font: 500 0.75rem/1 var(--font-mono);
+}
+
+.fde-library {
+  margin-top: var(--space-12);
+  padding: var(--space-8);
+  border: 0;
+  border-top: 1px solid var(--color-accent);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.fde-library > div > p:last-child,
+.fde-library dt {
+  color: var(--color-on-dark-muted);
+}
+
+.fde-library dl div {
+  border-color: var(--color-dark-rule);
+}
+
+.fde-contact {
+  margin-top: var(--space-12);
+  padding-top: clamp(6rem, 10vw, 9rem);
+  padding-bottom: clamp(6rem, 10vw, 9rem);
+  border-top-color: var(--color-rule-strong);
+  background: var(--color-paper);
+}
+
+.fde-contact-copy > p:not(.fde-section-kicker) {
+  font-size: 1rem;
+}
+
+.fde-contact h2 {
+  max-width: 15ch;
+  font-weight: 700;
+}
+
+.fde-contact-panel {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border-color: var(--color-rule-strong);
+  border-radius: var(--panel-radius);
+  background: var(--color-paper-raised);
+}
+
+.fde-contact-panel > header p,
+.fde-contact-panel .form-consent,
+.fde-contact-panel .form-error,
+.fde-contact-panel .form-status {
+  color: var(--color-ink-soft);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.fde-contact-panel .button {
+  border-radius: var(--panel-radius);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.fde-footer {
+  width: 100%;
+  min-height: 23rem;
+  padding-right: max(var(--space-4), calc((100vw - var(--content-max)) / 2 + var(--space-4)));
+  padding-left: max(var(--space-4), calc((100vw - var(--content-max)) / 2 + var(--space-4)));
+  border-top: 0;
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.fde-footer p {
+  max-width: 16ch;
+  font-weight: 700;
+}
+
+.fde-footer small {
+  color: var(--color-on-dark-muted);
+}
+
+/* Case pages: one operational narrative instead of repeated cards. */
+.fde-case-hero {
+  min-height: 44rem;
+  margin-top: 7.5rem;
+  padding: clamp(2rem, 6vw, 5rem);
+  border-radius: var(--panel-radius);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.fde-case-back,
+.fde-case-heading > p:last-child,
+.fde-case-status span {
+  color: var(--color-on-dark-muted);
+}
+
+.fde-case-heading h1 {
+  max-width: 12ch;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 700;
+}
+
+.fde-case-status {
+  border-color: var(--color-dark-rule);
+}
+
+.fde-case-status strong {
+  color: var(--color-accent-soft);
+}
+
+.fde-case-overview {
+  margin-top: var(--space-12);
+  border-color: var(--color-rule-strong);
+}
+
+.fde-case-overview article {
+  min-height: 20rem;
+  align-content: start;
+}
+
+.fde-case-flow .fde-system-diagram {
+  border-color: var(--color-dark-raised);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.fde-case-flow .fde-system-diagram figcaption,
+.fde-case-flow .fde-system-diagram li,
+.fde-case-flow .fde-system-diagram strong {
+  border-color: var(--color-dark-rule);
+}
+
+.fde-case-flow .fde-system-diagram figcaption,
+.fde-case-flow .fde-system-diagram li p {
+  color: var(--color-on-dark-muted);
+}
+
+.fde-case-flow .fde-system-diagram li > span {
+  color: var(--color-accent-soft);
+}
+
+.fde-case-decisions ol,
+.fde-case-results dl,
+.fde-case-notes article,
+.fde-case-next {
+  border-color: var(--color-rule-strong);
+}
+
+.fde-case-results dl div {
+  background: var(--color-paper-raised);
+}
+
+.fde-case-notes article:first-child {
+  border-top-color: var(--color-accent);
+}
+
+@media (min-width: 48rem) {
+  .fde-nav {
+    grid-template-columns: minmax(12rem, 1fr) auto minmax(12rem, 1fr);
+  }
+
+  .fde-hero {
+    grid-template-columns: minmax(0, 0.9fr) minmax(30rem, 1.1fr);
+  }
+
+  .fde-metrics {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .fde-metric {
+    min-height: 12rem;
+  }
+
+  .fde-metric:first-of-type {
+    padding-left: 0;
+  }
+
+  .fde-metric:last-child {
+    border-right: 0;
+  }
+}
+
+@media (max-width: 63.99rem) {
+  .fde-section-heading {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fde-section-heading > p:last-child {
+    grid-column: 1;
+  }
+
+  .fde-signal-stack {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fde-signal-diagnostic {
+    position: static;
+    min-height: auto;
+  }
+
+  .fde-experience-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fde-pipeline-track {
+    grid-template-columns: repeat(5, minmax(8rem, 1fr));
+    overflow-x: auto;
+  }
+
+  .fde-pipeline-detail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fde-pipeline-detail ul {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .fde-nav-shell,
+  .fde-nav-shell.is-compact {
+    top: var(--space-3);
+    width: calc(100% - var(--space-6));
+  }
+
+  .fde-nav,
+  .fde-nav-shell.is-compact .fde-nav {
+    padding-left: var(--space-4);
+  }
+
+  .fde-dock-item {
+    transform: none !important;
+  }
+
+  .fde-hero {
+    padding-top: 7.5rem;
+    padding-bottom: var(--space-16);
+  }
+
+  .fde-hero h1,
+  .fde-site.is-zh .fde-hero h1 {
+    max-width: 10ch;
+    font-size: clamp(2.75rem, 13vw, 4rem);
+  }
+
+  .fde-hero-visual,
+  .fde-network {
+    min-height: 29rem;
+  }
+
+  .fde-network-status {
+    display: none;
+  }
+
+  .fde-network canvas {
+    bottom: 9.5rem;
+    height: calc(100% - 14rem);
+  }
+
+  .fde-network-caption {
+    right: var(--space-5);
+    bottom: 4.5rem;
+  }
+
+  .fde-network-control {
+    right: auto;
+    bottom: var(--space-3);
+    left: var(--space-5);
+  }
+
+  .fde-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-bottom: 0;
+  }
+
+  .fde-metric {
+    min-height: 9.5rem;
+    padding: var(--space-4);
+    border-right: 1px solid var(--color-rule);
+  }
+
+  .fde-metric:nth-of-type(even) {
+    border-right: 0;
+  }
+
+  .fde-section-heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .fde-section-heading > p:last-child {
+    grid-column: 1;
+  }
+
+  .fde-method-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fde-method-list li,
+  .fde-method-list li:first-child {
+    min-height: 18rem;
+    padding: var(--space-6) 0;
+    border-right: 0;
+  }
+
+  .fde-signal-selector button {
+    padding-right: var(--space-10);
+    padding-left: 0;
+  }
+
+  .fde-signal-copy p {
+    font-size: 0.875rem;
+  }
+
+  .fde-signal-selector > a {
+    right: 0;
+  }
+
+  .fde-signal-diagnostic {
+    padding: var(--space-5);
+  }
+
+  .fde-signal-diagnostic > dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fde-signal-diagnostic > dl div,
+  .fde-signal-diagnostic > dl div:first-child {
+    min-height: 5.5rem;
+    padding: var(--space-4) 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-dark-rule);
+  }
+
+  .fde-signal-diagnostic .fde-system-diagram li {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .fde-signal-diagnostic .fde-system-diagram li p {
+    grid-column: 2;
+  }
+
+  .fde-experience-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fde-experience-facts article,
+  .fde-experience-facts article:first-child {
+    min-height: 11rem;
+    padding: var(--space-5) 0;
+    border-right: 0;
+  }
+
+  .fde-pipeline-track {
+    grid-template-columns: minmax(0, 1fr);
+    overflow: visible;
+  }
+
+  .fde-pipeline-track::before {
+    top: var(--space-6);
+    right: auto;
+    bottom: var(--space-6);
+    left: 1.35rem;
+    width: 1px;
+    height: auto;
+  }
+
+  .fde-pipeline-node {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .fde-pipeline-node button {
+    min-height: 4.5rem;
+    padding: var(--space-4) 0;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .fde-pipeline-detail {
+    min-height: 14rem;
+    padding: var(--space-5) 0;
+  }
+
+  .fde-library {
+    padding: var(--space-6);
+  }
+
+  .fde-contact {
+    gap: var(--space-10);
+  }
+
+  .fde-footer {
+    min-height: 19rem;
+  }
+
+  .fde-case-hero {
+    min-height: 39rem;
+    margin-top: 6.5rem;
+    padding: var(--space-8) var(--space-5);
+  }
+
+  .fde-case-heading h1 {
+    font-size: clamp(2.75rem, 13vw, 4rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fde-dock-item,
+  .fde-signal-selector button::before,
+  .fde-pipeline-node button > span {
+    transform: none !important;
+  }
+
+  .fde-signal-diagnostic {
+    animation: none;
+  }
+}

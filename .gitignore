@@ -10,3 +10,7 @@ worker/dist/
 .vercel/
 .DS_Store
 .env.local
+*.tsbuildinfo
+.codex-audit/
+.hallmark/
+docs/content-evidence.md

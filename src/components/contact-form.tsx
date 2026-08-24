@@ -36,11 +36,58 @@ declare global {
 type ContactFormProps = {
   endpoint: string;
   turnstileSiteKey: string;
+  locale?: "zh" | "en";
 };
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
-export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
+const formCopy = {
+  zh: {
+    verifyUnavailable: "安全验证暂时不可用，请刷新后重试。",
+    verifyExpired: "安全验证已过期，请重新完成验证。",
+    checkFields: "请检查标出的信息后再提交。",
+    verifyFirst: "请完成人机验证后再提交。",
+    serviceUnavailable: "联系服务正在配置中，请先通过邮箱或电话联系我。",
+    success: "收到，我会通过你留下的方式联系你。",
+    failed: "暂时没有发送成功，请重试或直接联系我。",
+    received: "已收到",
+    thanks: "谢谢你愿意留下信息，我会尽快回复。",
+    name: "怎么称呼你",
+    contact: "你的联系方式",
+    contactPlaceholder: "邮箱、手机号或微信",
+    message: "想聊些什么",
+    messagePlaceholder: "合作想法、工作机会，或只是打个招呼",
+    website: "个人网站",
+    consent: "我同意将以上信息用于本次联系。",
+    verification: "安全验证",
+    submitting: "正在发送",
+    submit: "留下联系方式",
+  },
+  en: {
+    verifyUnavailable: "Verification is temporarily unavailable. Please refresh and try again.",
+    verifyExpired: "Verification expired. Please complete it again.",
+    checkFields: "Please check the highlighted information before submitting.",
+    verifyFirst: "Please complete the human verification before submitting.",
+    serviceUnavailable: "The contact service is being configured. Please email or call me instead.",
+    success: "Received. I will reply using the contact method you provided.",
+    failed: "The message was not sent. Please retry or contact me directly.",
+    received: "Received",
+    thanks: "Thank you for leaving your details. I will reply soon.",
+    name: "Your name",
+    contact: "How can I reach you?",
+    contactPlaceholder: "Email, phone or WeChat",
+    message: "What would you like to discuss?",
+    messagePlaceholder: "A role, a project, or simply an introduction",
+    website: "Website",
+    consent: "I agree that this information may be used to contact me.",
+    verification: "Human verification",
+    submitting: "Sending",
+    submit: "Leave my details",
+  },
+} as const;
+
+export function ContactForm({ endpoint, turnstileSiteKey, locale = "zh" }: ContactFormProps) {
+  const copy = formCopy[locale];
   const [values, setValues] = useState<ContactValues>(emptyContactValues);
   const [errors, setErrors] = useState<ContactErrors>({});
   const [status, setStatus] = useState<SubmitStatus>("idle");
@@ -84,11 +131,11 @@ export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
         },
         "error-callback": () => {
           setValues((current) => ({ ...current, turnstileToken: "" }));
-          setStatusMessage("安全验证暂时不可用，请刷新后重试。");
+          setStatusMessage(copy.verifyUnavailable);
         },
         "expired-callback": () => {
           setValues((current) => ({ ...current, turnstileToken: "" }));
-          setStatusMessage("安全验证已过期，请重新完成验证。");
+          setStatusMessage(copy.verifyExpired);
         },
         theme: "auto",
       },
@@ -100,7 +147,7 @@ export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
         turnstileWidgetId.current = null;
       }
     };
-  }, [turnstileReady, turnstileSiteKey]);
+  }, [copy.verifyExpired, copy.verifyUnavailable, turnstileReady, turnstileSiteKey]);
 
   function updateValue<Key extends keyof ContactValues>(
     key: Key,
@@ -116,24 +163,24 @@ export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const nextErrors = validateContact(values);
+    const nextErrors = validateContact(values, locale);
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) {
       setStatus("idle");
-      setStatusMessage("请检查标出的信息后再提交。");
+      setStatusMessage(copy.checkFields);
       return;
     }
 
     if (!values.turnstileToken) {
       setStatus("error");
-      setStatusMessage("请完成人机验证后再提交。");
+      setStatusMessage(copy.verifyFirst);
       return;
     }
 
     if (!endpoint) {
       setStatus("error");
-      setStatusMessage("联系服务正在配置中，请先通过邮箱或电话联系我。");
+      setStatusMessage(copy.serviceUnavailable);
       return;
     }
 
@@ -152,10 +199,10 @@ export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
       }
 
       setStatus("success");
-      setStatusMessage("收到，我会通过你留下的方式联系你。");
+      setStatusMessage(copy.success);
     } catch {
       setStatus("error");
-      setStatusMessage("暂时没有发送成功，请重试或直接联系我。");
+      setStatusMessage(copy.failed);
       setValues((current) => ({ ...current, turnstileToken: "" }));
       if (turnstileWidgetId.current && window.turnstile) {
         window.turnstile.reset(turnstileWidgetId.current);
@@ -166,9 +213,9 @@ export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
   if (status === "success") {
     return (
       <div className="contact-success" role="status">
-        <span>已收到</span>
+        <span>{copy.received}</span>
         <h3>{statusMessage}</h3>
-        <p>谢谢你愿意留下信息，我会尽快回复。</p>
+        <p>{copy.thanks}</p>
       </div>
     );
   }
@@ -185,7 +232,7 @@ export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
       ) : null}
 
       <div className="form-field">
-        <label htmlFor="contact-name">怎么称呼你</label>
+        <label htmlFor="contact-name">{copy.name}</label>
         <input
           id="contact-name"
           name="name"
@@ -196,55 +243,49 @@ export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
           aria-invalid={Boolean(errors.name)}
           onChange={(event) => updateValue("name", event.target.value)}
         />
-        {errors.name ? (
-          <span className="form-error" id="contact-name-error">
-            {errors.name}
-          </span>
-        ) : null}
+        <span className="form-error" id="contact-name-error">
+          {errors.name ?? ""}
+        </span>
       </div>
 
       <div className="form-field">
-        <label htmlFor="contact-route">你的联系方式</label>
+        <label htmlFor="contact-route">{copy.contact}</label>
         <input
           id="contact-route"
           name="contact"
           autoComplete="email"
           maxLength={120}
-          placeholder="邮箱、手机号或微信"
+          placeholder={copy.contactPlaceholder}
           value={values.contact}
           aria-describedby={errors.contact ? "contact-route-error" : undefined}
           aria-invalid={Boolean(errors.contact)}
           onChange={(event) => updateValue("contact", event.target.value)}
         />
-        {errors.contact ? (
-          <span className="form-error" id="contact-route-error">
-            {errors.contact}
-          </span>
-        ) : null}
+        <span className="form-error" id="contact-route-error">
+          {errors.contact ?? ""}
+        </span>
       </div>
 
       <div className="form-field">
-        <label htmlFor="contact-message">想聊些什么</label>
+        <label htmlFor="contact-message">{copy.message}</label>
         <textarea
           id="contact-message"
           name="message"
           maxLength={1000}
           rows={5}
-          placeholder="合作想法、工作机会，或只是打个招呼"
+          placeholder={copy.messagePlaceholder}
           value={values.message}
           aria-describedby={errors.message ? "contact-message-error" : undefined}
           aria-invalid={Boolean(errors.message)}
           onChange={(event) => updateValue("message", event.target.value)}
         />
-        {errors.message ? (
-          <span className="form-error" id="contact-message-error">
-            {errors.message}
-          </span>
-        ) : null}
+        <span className="form-error" id="contact-message-error">
+          {errors.message ?? ""}
+        </span>
       </div>
 
       <div className="form-honeypot" aria-hidden="true">
-        <label htmlFor="contact-website">个人网站</label>
+        <label htmlFor="contact-website">{copy.website}</label>
         <input
           id="contact-website"
           name="website"
@@ -261,11 +302,11 @@ export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
           checked={values.consent}
           onChange={(event) => updateValue("consent", event.target.checked)}
         />
-        <span>我同意将以上信息用于本次联系。</span>
+        <span>{copy.consent}</span>
       </label>
-      {errors.consent ? <span className="form-error">{errors.consent}</span> : null}
+      <span className="form-error">{errors.consent ?? ""}</span>
 
-      <div className="turnstile-slot" ref={turnstileElement} aria-label="安全验证" />
+      <div className="turnstile-slot" ref={turnstileElement} aria-label={copy.verification} />
 
       <div className="form-submit-row">
         <button
@@ -273,7 +314,7 @@ export function ContactForm({ endpoint, turnstileSiteKey }: ContactFormProps) {
           type="submit"
           disabled={status === "submitting"}
         >
-          {status === "submitting" ? "正在发送" : "留下联系方式"}
+          {status === "submitting" ? copy.submitting : copy.submit}
           <PaperPlaneTilt size={17} weight="regular" aria-hidden="true" />
         </button>
         <p className={`form-status form-status-${status}`} aria-live="polite">
