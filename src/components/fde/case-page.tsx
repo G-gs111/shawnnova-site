@@ -16,26 +16,34 @@ type CasePageProps = { locale: Locale; project: Project };
 const labels = {
   zh: {
     back: "返回全部案例",
-    problem: "业务问题",
+    overview: "交付概览",
+    problem: "问题",
+    built: "构建",
+    adopted: "采用",
+    evidence: "证据",
     role: "我的职责",
     flow: "系统流程示意",
     flowNote: "为保护业务信息，以下为脱敏的 HTML 结构示意，不是仿造产品截图。",
-    decisions: "关键决策",
-    results: "结果",
-    boundary: "边界",
+    decisions: "关键决策与取舍",
+    results: "经验证的结果",
+    boundary: "证据边界",
     review: "复盘",
     next: "下一个案例",
     contact: "讨论类似问题",
   },
   en: {
     back: "Back to all case studies",
-    problem: "Business problem",
+    overview: "Delivery overview",
+    problem: "Problem",
+    built: "Built",
+    adopted: "Adopted",
+    evidence: "Evidence",
     role: "My responsibility",
     flow: "System flow illustration",
     flowNote: "This is an anonymized HTML structure diagram—not a simulated product screenshot.",
-    decisions: "Key decisions",
-    results: "Outcomes",
-    boundary: "Boundary",
+    decisions: "Key decisions and trade-offs",
+    results: "Verified outcomes",
+    boundary: "Evidence boundary",
     review: "Retrospective",
     next: "Next case study",
     contact: "Discuss a similar problem",
@@ -53,6 +61,13 @@ export function CasePage({ locale, project }: CasePageProps) {
     ? `/en/projects/${project.slug}`
     : `/projects/${project.slug}`;
   const homeHref = locale === "zh" ? "/" : "/en";
+  const evidenceLabels = {
+    problem: copy.problem,
+    built: copy.built,
+    adopted: copy.adopted,
+    proof: copy.evidence,
+  } as const;
+  const evidenceFields = ["problem", "built", "adopted", "proof"] as const;
 
   return (
     <div className={`fde-site fde-case-site is-${locale}`}>
@@ -71,6 +86,7 @@ export function CasePage({ locale, project }: CasePageProps) {
             <p className="fde-kicker">Case {project.index} / {project.category}</p>
             <h1>{project.title}</h1>
             <p>{project.summary}</p>
+            <p className="fde-case-role"><strong>{copy.role}：</strong>{project.role}</p>
           </div>
           <aside className="fde-case-status">
             <span>{locale === "zh" ? "交付状态" : "Delivery status"}</span>
@@ -78,13 +94,28 @@ export function CasePage({ locale, project }: CasePageProps) {
           </aside>
         </header>
 
-        <section className="fde-case-overview" aria-label={locale === "zh" ? "项目概览" : "Project overview"}>
-          <article>
-            <span>01</span><h2>{copy.problem}</h2><p>{project.problem}</p>
-          </article>
-          <article>
-            <span>02</span><h2>{copy.role}</h2><p>{project.role}</p>
-          </article>
+        <section className="fde-case-section fde-case-results" aria-labelledby="case-results-title">
+          <header>
+            <p className="fde-section-kicker">Proof / 02</p>
+            <h2 id="case-results-title">{copy.results}</h2>
+          </header>
+          <dl>
+            {project.results.map((result) => (
+              <div key={result.label}>
+                <dt>{result.label}</dt><dd>{result.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        <section className="fde-case-overview" aria-label={copy.overview}>
+          {evidenceFields.map((field, index) => (
+            <article key={field}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h2>{evidenceLabels[field]}</h2>
+              <p>{project.evidence[field]}</p>
+            </article>
+          ))}
         </section>
 
         <section className="fde-case-section fde-case-flow" aria-labelledby="case-flow-title">
@@ -112,28 +143,14 @@ export function CasePage({ locale, project }: CasePageProps) {
           </ol>
         </section>
 
-        <section className="fde-case-section fde-case-results" aria-labelledby="case-results-title">
-          <header>
-            <p className="fde-section-kicker">Proof / 05</p>
-            <h2 id="case-results-title">{copy.results}</h2>
-          </header>
-          <dl>
-            {project.results.map((result) => (
-              <div key={result.label}>
-                <dt>{result.label}</dt><dd>{result.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
         <section className="fde-case-notes">
           <article>
-            <p className="fde-section-kicker">Boundary / 06</p>
+            <p className="fde-section-kicker">Boundary / 05</p>
             <h2>{copy.boundary}</h2>
             <p>{project.boundary}</p>
           </article>
           <article>
-            <p className="fde-section-kicker">Review / 07</p>
+            <p className="fde-section-kicker">Review / 06</p>
             <h2>{copy.review}</h2>
             <p>{project.retrospective}</p>
           </article>
@@ -143,7 +160,7 @@ export function CasePage({ locale, project }: CasePageProps) {
           <div>
             <span>{copy.next}</span>
             <Link href={`${routePrefix}/projects/${nextProject.slug}`}>
-              {nextProject.shortTitle}<ArrowRight size={24} aria-hidden="true" />
+              {nextProject.title}<ArrowRight size={24} aria-hidden="true" />
             </Link>
           </div>
           <a className="fde-button fde-button-primary" href={`${homeHref}#contact`}>
