@@ -1,35 +1,32 @@
-# Design QA
+# Design QA — Recruiter Portfolio Redesign
 
-Status: passed in the user's Chrome on local and production builds
+## Inputs
 
-Date: 2026-07-22
+- Approved visual direction: `/Users/Admin/.codex/generated_images/019f7de7-b409-7c61-ad76-1f5fa712eb8a/exec-29ebeb17-dcbb-4daa-bae2-5a339253a1f9.png`
+- Implementation: `http://127.0.0.1:3000/`
+- Browser: the user's Google Chrome session only
+- Chrome viewport checks: 320×812, 375×812, 768×1024, 887×1774, 1280×900, 1920×1080
+- Visual evidence: Chrome viewport captures emitted during the 2026-09-19 QA session. The browser security policy prevented writing the in-memory capture back to a local data URL, so the captures remain attached to the task rather than duplicated as repository assets.
 
-## Reference comparison
+## Comparison
 
-- Compared the saved desktop hero and project screenshots from `https://www.lius-node.com/#about` directly beside the new implementation.
-- Preserved the reference's strongest interaction language: fixed active navigation, large kinetic typography, a pointer-following circular mask, restrained monochrome surfaces and generous spacing.
-- Kept Shawnnova's own identity through a cobalt accent, real project imagery, Chinese-first content and outcome-led project descriptions.
-- No reference branding, copy or assets are reused.
+The implementation preserves the approved direction's chalk-white paper, graphite typography, restrained vermilion accent, thin rule system, dense evidence bands, and dark delivery-console motif. It intentionally adapts the reference instead of pixel-copying it: real bilingual content and responsive case-study structures replace placeholder modules.
 
-## Chrome checks
+## Findings and fixes
 
-- Desktop viewport: 1202 x 716.
-- Mobile viewport override: 390 x 844.
-- Hero occupies exactly one mobile viewport and the primary action remains visible.
-- Circular mask moved from 50% / 50% to 79% / 44% after a pointer move, confirming the interaction works.
-- Active navigation updated correctly for capability, project, experience and contact sections.
-- Four project cards rendered with accurate states: two launched, one in development and one in exploration.
-- No public page text contains the private project name.
-- Mobile document width stayed within the viewport; project and contact layouts collapsed to one column.
-- Empty-form submission produced three inline validation messages and a live status message.
-- No page console errors were recorded.
+1. P2 — At 768–900px, the evidence strip occupied only the first column because legacy `.fde-metrics` grid rules still applied to the new wrapper. Fixed by making the wrapper block-level and the evidence strip explicitly full width.
+2. P2 — On English case pages, the verified-outcomes heading inherited the generic three-column case-header grid and collapsed to a zero-width column. Fixed with a dedicated results-header layout override.
+3. P2 — Next.js warned about the intentional global smooth-scroll behavior during route changes. Fixed by declaring `data-scroll-behavior="smooth"` on the root HTML element.
+4. P2 — Small copy in the dark contact section was checked after the redesign request that reported low contrast. Helper and consent text now render at 14px with the light muted-on-dark token; labels and values use the stronger on-dark token.
+5. P3 — The 887px breakpoint intentionally hides secondary navigation links while preserving language and contact actions. This reduces header crowding and matches the compact reference hierarchy.
 
-## Production verification
+## Final verification
 
-- Verified `https://260604.xyz` at 1202 x 716 and 390 x 844 in the user's Chrome.
-- Confirmed the production headline, four project cards, active project navigation and pointer-following hero mask.
-- Confirmed the anonymized client label is present and the private project name is absent.
-- Confirmed the Cloudflare Turnstile widget is visible in the production contact form without submitting a duplicate message.
-- Confirmed no horizontal overflow at either viewport.
-- Reset the temporary Chrome mobile viewport override after verification.
-- Saved and deployed Sites version 1 as an owner-only checkpoint at `https://shawnnova-portfolio-check.wustwkdzs-2719.chatgpt.site`.
+- No horizontal overflow at 320, 375, 768, 1280, or 1920px.
+- Evidence strip resolves to 1, 2, and 5 columns at mobile, tablet, and desktop widths.
+- Homepage contains exactly three featured case rows; the fourth case remains a clearly labeled supporting delivery.
+- All four case pages cycle correctly in both locale structures; switching language preserves the active case slug.
+- Keyboard focus is visible, contact helper copy remains legible, and essential information does not depend on animation.
+- Chrome console was rechecked after the scroll declaration; application warnings and errors are absent.
+
+final result: passed

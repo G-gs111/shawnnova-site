@@ -345,6 +345,7 @@ body:has(.fde-site)::before {
 
 .fde-metrics {
   position: relative;
+  display: block;
   width: min(100%, var(--content-max));
   margin: 0 auto;
   padding: 0 var(--space-6);
@@ -352,6 +353,7 @@ body:has(.fde-site)::before {
 
 .fde-evidence-strip {
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   border-bottom: 1px solid var(--color-rule-strong);
 }
@@ -1229,6 +1231,12 @@ body:has(.fde-site)::before {
   margin: 0;
   color: var(--color-ink-2);
   line-height: 1.65;
+}
+
+.fde-case-section.fde-case-results > header {
+  padding-bottom: 0;
+  display: block;
+  grid-template-columns: none;
 }
 
 .fde-system-diagram {
