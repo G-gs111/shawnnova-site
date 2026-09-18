@@ -1,14 +1,18 @@
-import { ArrowDownRight, ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowDownRight, ArrowRight, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
+
 import {
+  getFeaturedProjects,
   getHomeContent,
-  getProjects,
+  getSupportingProjects,
   type Locale,
 } from "@/content/portfolio";
 
+import { CaseEvidenceList } from "./case-evidence-list";
 import { ContactBlock } from "./contact-block";
+import { DeliveryConsole } from "./delivery-console";
 import { DeliveryPipeline } from "./delivery-pipeline";
-import { NetworkCanvas } from "./network-canvas";
-import { ProjectSignalStack } from "./project-signal-stack";
+import { EvidenceStrip } from "./evidence-strip";
 import { SectionHeading } from "./section-heading";
 import { SiteNav } from "./site-nav";
 
@@ -16,7 +20,8 @@ type PortfolioHomeProps = { locale: Locale };
 
 export function PortfolioHome({ locale }: PortfolioHomeProps) {
   const content = getHomeContent(locale);
-  const projects = getProjects(locale);
+  const featuredProjects = getFeaturedProjects(locale);
+  const supportingProject = getSupportingProjects(locale)[0];
   const routePrefix = locale === "zh" ? "" : "/en";
 
   return (
@@ -41,19 +46,28 @@ export function PortfolioHome({ locale }: PortfolioHomeProps) {
             </div>
           </div>
           <div className="fde-hero-visual">
-            <NetworkCanvas label={content.hero.diagramLabel} locale={locale} />
+            <DeliveryConsole stages={content.delivery.stages} locale={locale} />
           </div>
         </section>
 
-        <section className="fde-metrics" id="metrics" aria-label={content.metricsLabel}>
+        <div className="fde-metrics" id="metrics">
           <span className="fde-anchor-alias" id="proof" />
-          {content.metrics.map((metric, index) => (
-            <article className="fde-metric" key={metric.label}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{metric.value}</strong>
-              <p>{metric.label}</p>
-            </article>
-          ))}
+          <EvidenceStrip metrics={content.metrics} label={content.metricsLabel} />
+        </div>
+
+        <section className="fde-work fde-section" id="work" aria-labelledby="work-title">
+          <SectionHeading
+            kicker={content.work.kicker}
+            title={content.work.title}
+            intro={content.work.intro}
+            id="work-title"
+          />
+          <CaseEvidenceList
+            projects={featuredProjects}
+            locale={locale}
+            viewCaseLabel={content.work.viewCase}
+            routePrefix={routePrefix}
+          />
         </section>
 
         <section className="fde-method fde-section" id="method" aria-labelledby="method-title">
@@ -74,22 +88,6 @@ export function PortfolioHome({ locale }: PortfolioHomeProps) {
               </li>
             ))}
           </ol>
-        </section>
-
-        <section className="fde-work fde-section" id="work" aria-labelledby="work-title">
-          <SectionHeading
-            kicker={content.work.kicker}
-            title={content.work.title}
-            intro={content.work.intro}
-            id="work-title"
-          />
-          <ProjectSignalStack
-            projects={projects}
-            locale={locale}
-            viewCaseLabel={content.work.viewCase}
-            diagramLabel={content.work.systemDiagram}
-            routePrefix={routePrefix}
-          />
         </section>
 
         <section className="fde-experience fde-section" id="experience" aria-labelledby="experience-title">
@@ -117,22 +115,28 @@ export function PortfolioHome({ locale }: PortfolioHomeProps) {
             intro={content.systems.intro}
             id="systems-title"
           />
+          {supportingProject ? (
+            <article className="fde-supporting-system">
+              <header>
+                <span>{locale === "zh" ? "补充交付 / 04" : "Supporting delivery / 04"}</span>
+                <h3>{supportingProject.title}</h3>
+                <p>{supportingProject.summary}</p>
+                <Link href={`${routePrefix}/projects/${supportingProject.slug}`}>
+                  {content.work.viewCase}<ArrowUpRight size={18} aria-hidden="true" />
+                </Link>
+              </header>
+              <dl>
+                {supportingProject.cardFacts.map((fact) => (
+                  <div key={fact.label}>
+                    <dt>{fact.label}</dt>
+                    <dd>{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p>{supportingProject.boundary}</p>
+            </article>
+          ) : null}
           <DeliveryPipeline groups={content.systems.groups} locale={locale} />
-          <aside className="fde-library" aria-labelledby="library-title">
-            <div>
-              <p className="fde-section-kicker">Supporting system / 04</p>
-              <h3 id="library-title">{content.systems.libraryTitle}</h3>
-              <p>{content.systems.libraryIntro}</p>
-            </div>
-            <dl>
-              {content.systems.libraryFacts.map((fact) => (
-                <div key={fact.label}>
-                  <dt>{fact.label}</dt>
-                  <dd>{fact.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </aside>
         </section>
 
         <ContactBlock content={content.contact} locale={locale} />
