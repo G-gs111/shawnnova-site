@@ -1,81 +1,34 @@
 import { expect, test } from "@playwright/test";
 
-test("presents Shawnnova's identity, work and contact path", async ({ page }) => {
+test("presents recruiter evidence and all four case routes", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "把复杂技术，做成愿意被使用的产品。" }),
+    page.getByRole("heading", { name: "业务问题，不止分析；我把它交付成系统。" }),
   ).toBeVisible();
-  await expect(page.getByText("葛少玉", { exact: true }).first()).toBeVisible();
-  await expect(page.getByText("Shawnnova", { exact: true }).last()).toBeVisible();
-  for (const title of [
-    "带货短视频达人工具网站",
-    "AI 混剪工具",
-    "个人站开发",
-    "企业自动化工作流开发",
-  ]) {
-    await expect(page.locator("#work")).toContainText(title);
-  }
-  await expect(page.locator("#experience")).toContainText("运营");
-  await expect(page.locator("#experience")).toContainText("销售");
-  await expect(page.locator("#experience")).toContainText("产品开发");
-  await expect(page.locator("#experience")).toContainText("Vibe Coding");
-  await expect(page.locator("#approach")).toContainText("理解");
-  await expect(page.locator(".motto-band")).toContainText("功不唐捐，玉汝于成");
-  const toolStrip = page.getByRole("region", { name: "常用工具" });
-  await expect(toolStrip).toBeVisible();
-  for (const label of [
-    "Codex",
-    "飞书",
-    "GitHub",
-    "VS Code",
-    "Cloudflare",
-    "Vercel",
-  ]) {
-    await expect(toolStrip.getByText(label, { exact: true })).toBeVisible();
-  }
-
+  await expect(page.getByRole("region", { name: "交付控制台" })).toBeVisible();
+  await expect(page.getByRole("region", { name: "成果证据" })).toContainText("1,356");
+  await expect(page.locator(".fde-case-evidence-row")).toHaveCount(3);
+  await expect(page.locator(".fde-supporting-system")).toContainText("4");
   await expect(
-    page.locator("#contact").getByRole("link", { name: /shawnnovags111@gmail.com/i }),
-  ).toHaveAttribute("href", "mailto:shawnnovags111@gmail.com");
-  await expect(page.getByRole("link", { name: /18379582410/i })).toHaveAttribute(
-    "href",
-    "tel:18379582410",
-  );
-
-  const githubLink = page.getByRole("link", { name: /GitHub/i }).last();
-  await expect(githubLink).toHaveAttribute("href", "https://github.com/G-gs111");
+    page.getByRole("link", { name: /脚本知识库与 AI 生成工作流/ }),
+  ).toHaveAttribute("href", "/projects/script-knowledge-workflow");
+  await expect(page.locator("#experience")).toContainText("武汉科技大学");
+  await expect(page.locator("#experience")).toContainText("1/67");
 });
 
-test("uses an asymmetric experience rail and a two-column contact layout on desktop", async ({
-  page,
-}, testInfo) => {
+test("keeps the evidence table and contact band structured on desktop", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chrome");
   await page.goto("/");
 
-  await expect(page.locator(".experience-section")).toHaveCSS("display", "grid");
-  await expect(page.locator(".contact-layout")).toHaveCSS("display", "grid");
-  await expect(page.locator(".tool-list")).toHaveCSS("display", "grid");
-  await expect(page.locator("#work article")).toHaveCount(4);
+  await expect(page.locator(".fde-case-evidence-row").first()).toHaveCSS("display", "grid");
+  await expect(page.locator(".fde-contact")).toHaveCSS("display", "grid");
+  await expect(page.locator(".fde-contact-panel")).toBeVisible();
 
-  const toolColumns = await page.locator(".tool-list").evaluate((element) =>
+  const evidenceColumns = await page.locator(".fde-case-evidence-row dl").first().evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean),
   );
-  expect(toolColumns).toHaveLength(6);
-
-  const contactColumns = await page.locator(".contact-layout").evaluate((element) =>
-    getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean),
-  );
-  expect(contactColumns).toHaveLength(2);
-
-  const supportingColumns = await page.locator(".work-supporting").evaluate((element) =>
-    getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean),
-  );
-  expect(supportingColumns).toHaveLength(2);
-
-  const firstSupporting = page.locator(".work-supporting > div").first();
-  await expect(firstSupporting).toHaveCSS("grid-column-start", "1");
-  await expect(firstSupporting).toHaveCSS("grid-column-end", "-1");
+  expect(evidenceColumns).toHaveLength(4);
 });
 
 test("submits a visitor contact after Turnstile verification", async ({ page }) => {
@@ -115,43 +68,32 @@ test("submits a visitor contact after Turnstile verification", async ({ page }) 
   );
 });
 
-test("keeps the page within the mobile viewport", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "mobile-chrome");
+test("keeps the page within a 320px viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 900 });
   await page.goto("/");
 
   const overflow = await page.evaluate(
     () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
   );
   expect(overflow).toBeLessThanOrEqual(1);
-  await expect(page.locator("#work article")).toHaveCount(4);
-
-  const mobileSupportingColumns = await page.locator(".work-supporting").evaluate((element) =>
-    getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean),
-  );
-  expect(mobileSupportingColumns).toHaveLength(1);
-  await expect(page.locator(".work-supporting > div").first()).toHaveCSS(
-    "grid-column-start",
-    "auto",
-  );
+  await expect(page.locator(".fde-case-evidence-row")).toHaveCount(3);
   await expect(page.locator("#contact")).toBeVisible();
 });
 
 test("keeps portfolio content visible when reduced motion is enabled", async ({ page }) => {
-  const hydrationErrors: string[] = [];
+  const consoleErrors: string[] = [];
   page.on("console", (message) => {
-    if (message.type() === "error" && message.text().includes("hydrated")) {
-      hydrationErrors.push(message.text());
-    }
+    if (message.type() === "error") consoleErrors.push(message.text());
   });
 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
 
-  for (const card of await page.locator("#work article").all()) {
-    await expect(card).toBeVisible();
+  for (const row of await page.locator(".fde-case-evidence-row").all()) {
+    await expect(row).toBeVisible();
   }
-  for (const item of await page.locator("#approach article").all()) {
-    await expect(item).toBeVisible();
+  for (const step of await page.locator("#method li").all()) {
+    await expect(step).toBeVisible();
   }
-  expect(hydrationErrors).toEqual([]);
+  expect(consoleErrors).toEqual([]);
 });
