@@ -12,17 +12,22 @@ const publicSurface = `${home}\n${readFileSync(contactPath, "utf8")}`;
 const packageJson = JSON.parse(readFileSync(packagePath, "utf8"));
 
 const requiredContent = [
-  "把一线业务问题，做成能跑的系统。",
-  "I turn frontline business problems into systems teams can use.",
+  "业务问题，不止分析；我把它交付成系统。",
+  "I turn frontline business problems into systems teams adopt.",
   "content-compliance",
+  "script-knowledge-workflow",
   "selection-dashboard",
   "qianchuan-cockpit",
+  "429",
+  "1,356",
+  "89/100",
+  "27/30",
   "部分 WorkBuddy 控制能力仍在验收",
-  "some WorkBuddy control capabilities are still in acceptance",
+  "selected WorkBuddy control capabilities remain in acceptance",
 ];
 
 const requiredAnchors = ["about", "metrics", "proof", "approach", "work", "experience", "tools", "contact"];
-const forbidden = ["色彩萌宠", "武汉科技大学", "advertiser_id", "account_id", "access_token"];
+const forbidden = ["色彩萌宠", "advertiser_id", "account_id", "access_token"];
 const forbiddenPublicUi = ["QQ 邮箱", "QQ mailbox"];
 
 for (const value of requiredContent) {
